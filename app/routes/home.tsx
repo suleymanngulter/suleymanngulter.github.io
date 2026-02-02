@@ -280,16 +280,16 @@ export default function Home() {
           <p className="mb-6 max-w-xl text-center text-base text-stone-600 dark:text-stone-400 sm:mb-8 sm:text-lg">
             {t.hero.tagline}
           </p>
-          <div className="flex w-full max-w-sm flex-col gap-3 sm:max-w-none sm:flex-row sm:gap-4">
+          <div className="flex w-full max-w-sm flex-col items-center justify-center gap-3 sm:max-w-none sm:flex-row sm:gap-4">
             <a
               href="#projeler"
-              className="min-h-[44px] rounded-lg bg-amber-600 px-6 py-3 text-center text-sm font-medium text-white transition-colors hover:bg-amber-700 active:bg-amber-800 dark:bg-amber-500 dark:hover:bg-amber-600 dark:active:bg-amber-700"
+              className="min-h-[44px] w-full rounded-lg bg-amber-600 px-6 py-3 text-center text-sm font-medium text-white transition-colors hover:bg-amber-700 active:bg-amber-800 sm:w-auto dark:bg-amber-500 dark:hover:bg-amber-600 dark:active:bg-amber-700"
             >
               {t.hero.viewProjects}
             </a>
             <a
               href="#iletisim"
-              className="min-h-[44px] rounded-lg border border-stone-300 px-6 py-3 text-center text-sm font-medium transition-colors hover:border-amber-500 hover:text-amber-600 active:bg-stone-100 dark:border-stone-600 dark:hover:border-amber-500 dark:hover:text-amber-400 dark:active:bg-stone-800"
+              className="min-h-[44px] w-full rounded-lg border border-stone-300 px-6 py-3 text-center text-sm font-medium transition-colors hover:border-amber-500 hover:text-amber-600 active:bg-stone-100 dark:border-stone-600 dark:hover:border-amber-500 dark:hover:text-amber-400 dark:active:bg-stone-800 sm:w-auto"
             >
               {t.hero.getInTouch}
             </a>
@@ -431,7 +431,11 @@ export default function Home() {
             </h2>
             <div className="grid gap-6 sm:gap-8 sm:grid-cols-2 lg:grid-cols-3">
               {t.projects.items.map((project) => {
-                const href = "github" in project ? project.github : null;
+                const rawGithub = (project as { github?: string | null }).github;
+                const href =
+                  typeof rawGithub === "string" && rawGithub.length > 0
+                    ? rawGithub
+                    : null;
                 const Wrapper = href ? "a" : "article";
                 const wrapperProps = href
                   ? {
@@ -461,11 +465,11 @@ export default function Home() {
                         </span>
                       ))}
                     </div>
-                    {href && (
+                    {href ? (
                       <span className="mt-auto text-sm font-medium text-amber-600 dark:text-amber-400">
                         {t.projects.viewOnGitHub} →
                       </span>
-                    )}
+                    ) : null}
                   </Wrapper>
                 );
               })}
