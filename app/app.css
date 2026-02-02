@@ -11,6 +11,7 @@
 html,
 body {
   @apply bg-stone-50 text-stone-900 dark:bg-stone-950 dark:text-stone-100;
+  overflow-x: hidden; /* Sayfa kayması: yatay taşmayı engeller */
 }
 
 html.dark {
