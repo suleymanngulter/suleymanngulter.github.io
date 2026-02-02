@@ -122,48 +122,48 @@ export const translations = {
           description:
             ".NET Framework, MSSQL ve Entity Framework ile masaüstü fitness yönetim uygulaması.",
           tech: [".NET", "MSSQL", "Entity Framework"],
-          github: "https://github.com/suleymanngulter",
+          github: "https://github.com/suleymanngulter/fitness-otomasyonu"
         },
         {
           title: "Library Automation",
           description: "Flutter ile geliştirilmiş kütüphane yönetim uygulaması.",
           tech: ["Flutter"],
-          github: "https://github.com/suleymanngulter",
+          github: "https://github.com/suleymanngulter/kutuphane_otomasyonu",
         },
         {
           title: "Income/Expense Analysis App",
           description:
             ".NET Core Web API, Entity Framework, MySQL, REST API ve Authentication ile masaüstü finansal yönetim uygulaması.",
           tech: [".NET Core", "Entity Framework", "MySQL", "REST API"],
-          github: "https://github.com/suleymanngulter",
+          github: "https://github.com/suleymanngulter/GelirGiderAnalizi"
         },
         {
           title: "Assistant API",
           description:
             "Gelen kutunuzdaki okunmamış e-postaları ChatGPT API ile özetleyen yapay zeka asistanı. .NET Core Web API ile geliştirildi.",
           tech: [".NET Core", "ChatGPT API"],
-          github: "https://github.com/suleymanngulter",
+          github: "https://github.com/suleymanngulter/AsistanAPI",
         },
         {
           title: "Library Management System",
           description:
             "React arayüzü, Mikroservis mimarisi ve içerik/profil tabanlı öneriler için Python tabanlı yapay zeka (MongoDB, Authentication).",
           tech: ["React", "Microservices", "Python", "MongoDB"],
-          github: "https://github.com/suleymanngulter",
+          github: "https://github.com/suleymanngulter/LMS",
         },
         {
           title: "Real Estate & Car Rental System Analysis & Design",
           description:
             "Kiralama sistemi için gereksinim, senaryo, teknik ve hukuki fizibilite analizi ve tasarımı.",
           tech: ["Analysis", "Design"],
-          github: "https://github.com/suleymanngulter",
+          github: "https://github.com/suleymanngulter/Emlak_ve_Arac_Kiralama_Sistemi_Analiz_Tasarimi",
         },
         {
           title: "Vehicle Sales & Technical Service Tracking System",
           description:
             "Araç satış ve teknik servis takibi için ekip projesi. .NET Framework masaüstü uygulaması, MSSQL ile veritabanı işlemleri (triggers, stored procedures).",
           tech: [".NET", "MSSQL"],
-          github: "https://github.com/suleymanngulter",
+          github: "https://github.com/AracSatisveTeknikServisTakipSistemi/ProjeVtys",
         },
       ],
     },
@@ -303,49 +303,49 @@ export const translations = {
           description:
             "A desktop fitness management application built with .NET Framework, MSSQL, and Entity Framework.",
           tech: [".NET", "MSSQL", "Entity Framework"],
-          github: "https://github.com/suleymanngulter",
+          github: null as string | null,
         },
         {
           title: "Library Automation",
           description:
             "A library management application developed with Flutter.",
           tech: ["Flutter"],
-          github: "https://github.com/suleymanngulter",
+          github: null as string | null,
         },
         {
           title: "Income/Expense Analysis App",
           description:
             "A desktop application for financial management using .NET Core Web API, Entity Framework, MySQL, REST API, and Authentication.",
           tech: [".NET Core", "Entity Framework", "MySQL", "REST API"],
-          github: "https://github.com/suleymanngulter",
+          github: null as string | null,
         },
         {
           title: "Assistant API",
           description:
             "An AI assistant that summarizes unread emails in your inbox using .NET Core Web API and the ChatGPT API.",
           tech: [".NET Core", "ChatGPT API"],
-          github: "https://github.com/suleymanngulter",
+          github: null as string | null,
         },
         {
           title: "Library Management System",
           description:
             "A system featuring a React UI, Microservices architecture, and a Python-based AI for content and profile-based recommendations (MongoDB, Authentication).",
           tech: ["React", "Microservices", "Python", "MongoDB"],
-          github: "https://github.com/suleymanngulter",
+          github: null as string | null,
         },
         {
           title: "Real Estate & Car Rental System Analysis & Design",
           description:
             "Requirements, scenario, technical, and legal feasibility analysis and design for a rental system.",
           tech: ["Analysis", "Design"],
-          github: "https://github.com/suleymanngulter",
+          github: null as string | null,
         },
         {
           title: "Vehicle Sales & Technical Service Tracking System",
           description:
             "A team project for tracking vehicle sales and services. Developed as a .NET Framework desktop application using MSSQL for all database operations (triggers, stored procedures, etc.).",
           tech: [".NET", "MSSQL"],
-          github: "https://github.com/suleymanngulter",
+          github: null as string | null,
         },
       ],
     },

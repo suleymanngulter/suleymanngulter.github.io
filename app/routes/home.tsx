@@ -193,21 +193,24 @@ export default function Home() {
     setIsDark((prev) => !prev);
   }
 
+  const [menuOpen, setMenuOpen] = useState(false);
+
   const t = translations[lang];
 
   return (
     <div className="min-h-screen bg-stone-50 text-stone-900 dark:bg-stone-950 dark:text-stone-100">
       {/* Navigation */}
       <header className="fixed top-0 left-0 right-0 z-50 border-b border-stone-200/80 bg-stone-50/90 backdrop-blur-md dark:border-stone-800 dark:bg-stone-950/90">
-        <nav className="mx-auto flex max-w-4xl items-center justify-between px-6 py-4">
+        <nav className="mx-auto flex max-w-4xl items-center justify-between px-4 py-3 sm:px-6 sm:py-4">
           <a
             href="#"
-            className="text-lg font-semibold tracking-tight text-amber-600 dark:text-amber-400"
+            className="text-base font-semibold tracking-tight text-amber-600 dark:text-amber-400 sm:text-lg"
           >
             Süleyman Gülter
           </a>
-          <div className="flex items-center gap-4 sm:gap-6">
-            <ul className="flex flex-wrap gap-4 sm:gap-8">
+          {/* Masaüstü: menü linkleri + tema + dil */}
+          <div className="hidden items-center gap-6 lg:flex lg:gap-8">
+            <ul className="flex gap-6 lg:gap-8">
               {navIds.map(({ href, key }) => (
                 <li key={href}>
                   <a
@@ -224,31 +227,69 @@ export default function Home() {
               <LanguageSwitcher lang={lang} setLanguage={setLanguage} />
             </div>
           </div>
+          {/* Mobil: hamburger butonu */}
+          <div className="flex items-center gap-2 lg:hidden">
+            <ThemeToggle isDark={isDark} toggle={toggleTheme} />
+            <LanguageSwitcher lang={lang} setLanguage={setLanguage} />
+            <button
+              type="button"
+              onClick={() => setMenuOpen((o) => !o)}
+              aria-label={menuOpen ? "Menüyü kapat" : "Menüyü aç"}
+              aria-expanded={menuOpen}
+              className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-stone-200 text-stone-600 transition-colors hover:bg-stone-100 dark:border-stone-700 dark:text-stone-400 dark:hover:bg-stone-800"
+            >
+              {menuOpen ? (
+                <span className="text-xl" aria-hidden>✕</span>
+              ) : (
+                <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+              )}
+            </button>
+          </div>
         </nav>
+        {/* Mobil açılır menü */}
+        {menuOpen && (
+          <div className="border-t border-stone-200 bg-stone-50 px-4 py-4 dark:border-stone-800 dark:bg-stone-950 lg:hidden">
+            <ul className="flex flex-col gap-1">
+              {navIds.map(({ href, key }) => (
+                <li key={href}>
+                  <a
+                    href={href}
+                    onClick={() => setMenuOpen(false)}
+                    className="block rounded-lg px-4 py-3 text-base font-medium text-stone-600 transition-colors hover:bg-stone-100 hover:text-amber-600 dark:text-stone-400 dark:hover:bg-stone-800 dark:hover:text-amber-400"
+                  >
+                    {t.nav[key]}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
       </header>
 
       <main>
         {/* Hero */}
-        <section className="flex min-h-screen flex-col items-center justify-center px-6 pb-32 pt-16">
-          <p className="mb-4 text-sm font-medium uppercase tracking-widest text-amber-600 dark:text-amber-400">
+        <section className="flex min-h-screen flex-col items-center justify-center px-4 pb-24 pt-20 sm:px-6 sm:pb-32 sm:pt-24">
+          <p className="mb-3 text-xs font-medium uppercase tracking-widest text-amber-600 dark:text-amber-400 sm:mb-4 sm:text-sm">
             {t.hero.hello}
           </p>
-          <h1 className="mb-4 max-w-2xl text-center text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl">
+          <h1 className="mb-3 max-w-2xl text-center text-3xl font-bold tracking-tight sm:mb-4 sm:text-4xl md:text-5xl lg:text-6xl">
             Süleyman Gülter
           </h1>
-          <p className="mb-8 max-w-xl text-center text-lg text-stone-600 dark:text-stone-400">
+          <p className="mb-6 max-w-xl text-center text-base text-stone-600 dark:text-stone-400 sm:mb-8 sm:text-lg">
             {t.hero.tagline}
           </p>
-          <div className="flex gap-4">
+          <div className="flex w-full max-w-sm flex-col gap-3 sm:max-w-none sm:flex-row sm:gap-4">
             <a
               href="#projeler"
-              className="rounded-lg bg-amber-600 px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-amber-700 dark:bg-amber-500 dark:hover:bg-amber-600"
+              className="min-h-[44px] rounded-lg bg-amber-600 px-6 py-3 text-center text-sm font-medium text-white transition-colors hover:bg-amber-700 active:bg-amber-800 dark:bg-amber-500 dark:hover:bg-amber-600 dark:active:bg-amber-700"
             >
               {t.hero.viewProjects}
             </a>
             <a
               href="#iletisim"
-              className="rounded-lg border border-stone-300 px-6 py-3 text-sm font-medium transition-colors hover:border-amber-500 hover:text-amber-600 dark:border-stone-600 dark:hover:border-amber-500 dark:hover:text-amber-400"
+              className="min-h-[44px] rounded-lg border border-stone-300 px-6 py-3 text-center text-sm font-medium transition-colors hover:border-amber-500 hover:text-amber-600 active:bg-stone-100 dark:border-stone-600 dark:hover:border-amber-500 dark:hover:text-amber-400 dark:active:bg-stone-800"
             >
               {t.hero.getInTouch}
             </a>
@@ -258,13 +299,13 @@ export default function Home() {
         {/* About */}
         <section
           id="hakkimda"
-          className="border-t border-stone-200 px-6 pt-24 pb-24 dark:border-stone-800"
+          className="border-t border-stone-200 px-4 py-16 sm:px-6 sm:py-24 dark:border-stone-800"
         >
           <div className="mx-auto max-w-3xl">
-            <h2 className="mb-6 text-2xl font-bold tracking-tight sm:text-3xl">
+            <h2 className="mb-4 text-xl font-bold tracking-tight sm:mb-6 sm:text-2xl md:text-3xl">
               {t.about.title}
             </h2>
-            <p className="leading-relaxed text-stone-600 dark:text-stone-400">
+            <p className="text-sm leading-relaxed text-stone-600 dark:text-stone-400 sm:text-base">
               {t.about.text}
             </p>
           </div>
@@ -273,17 +314,17 @@ export default function Home() {
         {/* Education */}
         <section
           id="egitim"
-          className="border-t border-stone-200 bg-white px-6 py-24 dark:border-stone-800 dark:bg-stone-900/50"
+          className="border-t border-stone-200 bg-white px-4 py-16 sm:px-6 sm:py-24 dark:border-stone-800 dark:bg-stone-900/50"
         >
           <div className="mx-auto max-w-3xl">
-            <h2 className="mb-8 text-2xl font-bold tracking-tight sm:text-3xl">
+            <h2 className="mb-6 text-xl font-bold tracking-tight sm:mb-8 sm:text-2xl md:text-3xl">
               {t.education.title}
             </h2>
-            <ul className="space-y-8">
+            <ul className="space-y-6 sm:space-y-8">
               {t.education.items.map((edu) => (
                 <li
                   key={edu.school}
-                  className="border-l-2 border-amber-500 pl-6"
+                  className="border-l-2 border-amber-500 pl-4 sm:pl-6"
                 >
                   <h3 className="font-semibold text-stone-900 dark:text-stone-100">
                     {edu.school}
@@ -315,17 +356,17 @@ export default function Home() {
         {/* Experience */}
         <section
           id="deneyim"
-          className="border-t border-stone-200 px-6 py-24 dark:border-stone-800"
+          className="border-t border-stone-200 px-4 py-16 sm:px-6 sm:py-24 dark:border-stone-800"
         >
           <div className="mx-auto max-w-3xl">
-            <h2 className="mb-8 text-2xl font-bold tracking-tight sm:text-3xl">
+            <h2 className="mb-6 text-xl font-bold tracking-tight sm:mb-8 sm:text-2xl md:text-3xl">
               {t.experience.title}
             </h2>
-            <ul className="space-y-8">
+            <ul className="space-y-6 sm:space-y-8">
               {t.experience.items.map((exp) => (
                 <li
                   key={exp.title + exp.period}
-                  className="rounded-xl border border-stone-200 bg-white p-6 dark:border-stone-700 dark:bg-stone-900/50"
+                  className="rounded-xl border border-stone-200 bg-white p-4 sm:p-6 dark:border-stone-700 dark:bg-stone-900/50"
                 >
                   <div className="mb-2 flex flex-wrap items-center justify-between gap-2">
                     <h3 className="font-semibold text-stone-900 dark:text-stone-100">
@@ -360,13 +401,13 @@ export default function Home() {
         {/* Skills */}
         <section
           id="beceriler"
-          className="border-t border-stone-200 bg-white px-6 py-24 dark:border-stone-800 dark:bg-stone-900/50"
+          className="border-t border-stone-200 bg-white px-4 py-16 sm:px-6 sm:py-24 dark:border-stone-800 dark:bg-stone-900/50"
         >
           <div className="mx-auto max-w-3xl">
-            <h2 className="mb-8 text-2xl font-bold tracking-tight sm:text-3xl">
+            <h2 className="mb-6 text-xl font-bold tracking-tight sm:mb-8 sm:text-2xl md:text-3xl">
               {t.skills.title}
             </h2>
-            <ul className="flex flex-wrap gap-3">
+            <ul className="flex flex-wrap gap-2 sm:gap-3">
               {t.skills.items.map((skill) => (
                 <li
                   key={skill}
@@ -382,13 +423,13 @@ export default function Home() {
         {/* Projects */}
         <section
           id="projeler"
-          className="border-t border-stone-200 px-6 py-24 dark:border-stone-800"
+          className="border-t border-stone-200 px-4 py-16 sm:px-6 sm:py-24 dark:border-stone-800"
         >
           <div className="mx-auto max-w-4xl">
-            <h2 className="mb-12 text-2xl font-bold tracking-tight sm:text-3xl">
+            <h2 className="mb-8 text-xl font-bold tracking-tight sm:mb-12 sm:text-2xl md:text-3xl">
               {t.projects.title}
             </h2>
-            <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="grid gap-6 sm:gap-8 sm:grid-cols-2 lg:grid-cols-3">
               {t.projects.items.map((project) => {
                 const href = "github" in project ? project.github : null;
                 const Wrapper = href ? "a" : "article";
@@ -398,16 +439,16 @@ export default function Home() {
                       target: "_blank" as const,
                       rel: "noreferrer",
                       className:
-                        "flex flex-col rounded-xl border border-stone-200 bg-white p-6 shadow-sm transition-shadow hover:shadow-md hover:border-amber-400 dark:border-stone-700 dark:bg-stone-900/50 dark:hover:border-amber-500",
+                        "flex flex-col rounded-xl border border-stone-200 bg-white p-4 shadow-sm transition-shadow hover:shadow-md hover:border-amber-400 active:border-amber-500 dark:border-stone-700 dark:bg-stone-900/50 dark:hover:border-amber-500 sm:p-6",
                     }
                   : {
                       className:
-                        "flex flex-col rounded-xl border border-stone-200 bg-white p-6 shadow-sm transition-shadow hover:shadow-md dark:border-stone-700 dark:bg-stone-900/50",
+                        "flex flex-col rounded-xl border border-stone-200 bg-white p-4 shadow-sm transition-shadow hover:shadow-md dark:border-stone-700 dark:bg-stone-900/50 sm:p-6",
                     };
                 return (
                   <Wrapper key={project.title} {...wrapperProps}>
-                    <h3 className="mb-2 text-lg font-semibold">{project.title}</h3>
-                    <p className="mb-4 flex-1 text-sm text-stone-600 dark:text-stone-400">
+                    <h3 className="mb-2 text-base font-semibold sm:text-lg">{project.title}</h3>
+                    <p className="mb-4 flex-1 text-sm leading-relaxed text-stone-600 dark:text-stone-400">
                       {project.description}
                     </p>
                     <div className="mb-4 flex flex-wrap gap-2">
@@ -435,47 +476,47 @@ export default function Home() {
         {/* Contact */}
         <section
           id="iletisim"
-          className="border-t border-stone-200 bg-white px-6 py-24 dark:border-stone-800 dark:bg-stone-900/50"
+          className="border-t border-stone-200 bg-white px-4 py-16 sm:px-6 sm:py-24 dark:border-stone-800 dark:bg-stone-900/50"
         >
           <div className="mx-auto max-w-2xl text-center">
-            <h2 className="mb-4 text-2xl font-bold tracking-tight sm:text-3xl">
+            <h2 className="mb-3 text-xl font-bold tracking-tight sm:mb-4 sm:text-2xl md:text-3xl">
               {t.contact.title}
             </h2>
-            <p className="mb-8 text-stone-600 dark:text-stone-400">
+            <p className="mb-6 text-sm text-stone-600 dark:text-stone-400 sm:mb-8 sm:text-base">
               {t.contact.subtitle}
             </p>
-            <div className="flex flex-wrap justify-center gap-x-8 gap-y-4">
+            <div className="flex flex-col items-stretch gap-2 sm:flex-row sm:flex-wrap sm:justify-center sm:gap-x-8 sm:gap-y-4">
               <a
                 href="tel:+905316287072"
-                className="flex items-center gap-2 text-stone-600 hover:text-amber-600 dark:text-stone-400 dark:hover:text-amber-400"
+                className="flex min-h-[44px] items-center justify-center gap-2 rounded-lg py-3 text-stone-600 transition-colors hover:bg-stone-100 hover:text-amber-600 active:bg-stone-200 dark:text-stone-400 dark:hover:bg-stone-800 dark:hover:text-amber-400 dark:active:bg-stone-700 sm:justify-center sm:py-0"
               >
-                <PhoneIcon className="h-5 w-5" />
-                +90 531 628 70 72
+                <PhoneIcon className="h-5 w-5 shrink-0" />
+                <span className="text-sm sm:text-base">+90 531 628 70 72</span>
               </a>
               <a
                 href="mailto:suleymangulter2@gmail.com"
-                className="flex items-center gap-2 text-amber-600 hover:underline dark:text-amber-400"
+                className="flex min-h-[44px] items-center justify-center gap-2 rounded-lg py-3 text-amber-600 transition-colors hover:bg-amber-50 hover:underline active:bg-amber-100 dark:text-amber-400 dark:hover:bg-amber-900/20 dark:active:bg-amber-900/30 sm:justify-center sm:py-0"
               >
-                <MailIcon className="h-5 w-5" />
-                suleymangulter2@gmail.com
+                <MailIcon className="h-5 w-5 shrink-0" />
+                <span className="break-all text-sm sm:text-base">suleymangulter2@gmail.com</span>
               </a>
               <a
                 href="https://github.com/suleymanngulter/"
                 target="_blank"
                 rel="noreferrer"
-                className="flex items-center gap-2 text-stone-600 hover:text-amber-600 dark:text-stone-400 dark:hover:text-amber-400"
+                className="flex min-h-[44px] items-center justify-center gap-2 rounded-lg py-3 text-stone-600 transition-colors hover:bg-stone-100 hover:text-amber-600 active:bg-stone-200 dark:text-stone-400 dark:hover:bg-stone-800 dark:hover:text-amber-400 dark:active:bg-stone-700 sm:justify-center sm:py-0"
               >
-                <GitHubIcon className="h-5 w-5" />
-                GitHub
+                <GitHubIcon className="h-5 w-5 shrink-0" />
+                <span className="text-sm sm:text-base">GitHub</span>
               </a>
               <a
                 href="https://www.linkedin.com/in/suleymanngulter/"
                 target="_blank"
                 rel="noreferrer"
-                className="flex items-center gap-2 text-stone-600 hover:text-amber-600 dark:text-stone-400 dark:hover:text-amber-400"
+                className="flex min-h-[44px] items-center justify-center gap-2 rounded-lg py-3 text-stone-600 transition-colors hover:bg-stone-100 hover:text-amber-600 active:bg-stone-200 dark:text-stone-400 dark:hover:bg-stone-800 dark:hover:text-amber-400 dark:active:bg-stone-700 sm:justify-center sm:py-0"
               >
-                <LinkedInIcon className="h-5 w-5" />
-                LinkedIn
+                <LinkedInIcon className="h-5 w-5 shrink-0" />
+                <span className="text-sm sm:text-base">LinkedIn</span>
               </a>
             </div>
             <p className="mt-6 text-sm text-stone-500 dark:text-stone-500">
