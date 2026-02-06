@@ -29,7 +29,7 @@ export const translations = {
           school: "Düzce Üniversitesi",
           years: "2022-2026",
           program: "Bilgisayar Mühendisliği",
-          gpa: "3.06",
+          gpa: "3.19",
           extra: null as string | null,
         },
         {
