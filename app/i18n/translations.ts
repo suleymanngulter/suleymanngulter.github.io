@@ -118,6 +118,13 @@ export const translations = {
       viewOnGitHub: "GitHub'da gör",
       items: [
         {
+          title: "Kumsal Restaurant",
+          description:
+            "Clean Architecture ile geliştirilmiş mikroservis restoran sistemi. TypeScript (Node) servisleri, Go newsletter servisi, RabbitMQ, PostgreSQL, Docker Compose, JWT ve CQRS katalog.",
+          tech: ["TypeScript", "Go", "Microservices", "PostgreSQL", "RabbitMQ", "Docker"],
+          github: "https://github.com/suleymanngulter/Restoran-Uygulamasi",
+        },
+        {
           title: "Fitness Automation",
           description:
             ".NET Framework, MSSQL ve Entity Framework ile masaüstü fitness yönetim uygulaması.",
@@ -298,6 +305,13 @@ export const translations = {
       live: "Live",
       viewOnGitHub: "View on GitHub",
       items: [
+        {
+          title: "Kumsal Restaurant",
+          description:
+            "A microservice restaurant system built with Clean Architecture. TypeScript (Node) services, a Go newsletter service, RabbitMQ, PostgreSQL, Docker Compose, JWT, and CQRS catalog.",
+          tech: ["TypeScript", "Go", "Microservices", "PostgreSQL", "RabbitMQ", "Docker"],
+          github: "https://github.com/suleymanngulter/Restoran-Uygulamasi",
+        },
         {
           title: "Fitness Automation",
           description:
