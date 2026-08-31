@@ -13,7 +13,7 @@ export const translations = {
     hero: {
       hello: "Merhaba, ben",
       tagline:
-        "Backend Developer · .NET · Mikroservis · Verimlilik ve sürdürülebilirlik odaklı çözümler üretiyorum.",
+        "Software Engineer · Node.js · .NET · Mikroservis · Verimlilik ve sürdürülebilirlik odaklı çözümler üretiyorum.",
       viewProjects: "Projeleri Gör",
       getInTouch: "İletişime Geç",
     },
@@ -53,11 +53,19 @@ export const translations = {
       projectLink: "Proje linki",
       items: [
         {
+          title: "Software Engineer",
+          period: "2026",
+          org: "Yukatech Bilişim A.Ş.",
+          description:
+            "Software Engineer olarak çalıştım. Node.js ile Backend, Clean Architecture ve Mikroservis Mimarisi alanlarında çeşitli projeler geliştirdim.",
+          link: null as string | null,
+        },
+        {
           title: "Entrepreneurship Marathon",
           period: "2025",
           org: "Düzce Teknopark",
           description:
-            "SATaiLITE sel riski tespit sistemi ile finalist olarak katıldım. Girişimcilik, iş fikri geliştirme, iş modelleri ve hedef kitle belirleme konularında deneyim kazandım.",
+            "SATaiLITE sel riski tespit sistemi fikriyle finalist ekipler arasında yer aldım. Girişimcilik, iş fikri geliştirme, iş modelleri ve hedef kitle belirleme konularında deneyim kazandım.",
           link: "https://github.com/suleymanngulter/SATaiLITE-StartUp",
         },
         {
@@ -65,7 +73,7 @@ export const translations = {
           period: "2024-2025",
           org: "Düzce Üniversitesi",
           description:
-            "Hackathon Koordinatörü olarak, mülakat sürecinde en verimli ekip üyelerinin yalnızca yüksek teknik becerilere sahip olanlar değil, her alanda kendini geliştirmeye açık olanlar olduğunu öğrendim. Ekibimde açık fikirliliği teşvik eden bir ortam oluşturdum ve çözüm odaklı bir bakış açısı kazandırdım.",
+            "Hackathon Koordinatörü olarak mülakat stratejilerini yeniden yapılandırdım; teknik yeterliliğin ötesinde uyum ve öğrenmeye açıklık kapasitesi yüksek bir ekip kurdum. Çözüm odaklı bakış açısı ve açık fikirlilik kültürü oluşturarak krizleri verimli yönetebilen dinamik bir ortam yarattım.",
           link: null as string | null,
         },
         {
@@ -77,39 +85,57 @@ export const translations = {
           link: null as string | null,
         },
         {
-          title: "Mobile Developer Stajyer",
-          period: "2024",
-          org: "TBA Academy",
-          description: "Flutter kullanarak mobil uygulama geliştirme stajı tamamladım.",
-          link: null as string | null,
-        },
-        {
           title: "Entrepreneurship Marathon",
           period: "2024",
           org: "Düzce Teknopark",
           description:
-            "TarlaBot, insansız tarım aracı projesi ile finalist ekipler arasında yer aldım. Fikir geliştirme ve ekip çalışması konularında önemli deneyim kazandım.",
+            "TarlaBot insansız tarım aracı projesiyle finalist ekipler arasında yer aldım. Fikir geliştirme ve ekip çalışması konularında önemli deneyim kazandım.",
           link: "https://github.com/suleymanngulter/TarlaBotStartUp",
+        },
+        {
+          title: "Mobile Developer Stajyer",
+          period: "2024",
+          org: "TBA Academy",
+          description:
+            "Flutter ile mobil uygulama geliştirme alanında staj yaptım ve kütüphane otomasyonu uygulaması geliştirdim.",
+          link: null as string | null,
         },
       ],
     },
     skills: {
       title: "Beceriler",
-      items: [
-        "Organization",
-        "Teamwork",
-        "Node.js",
-        ".NET",
-        "Presentation",
-        "Innovative Thinking",
-        "Flutter",
-        "Docker",
-        "Excel",
-        "Microservices",
-        "Java",
-        "Entity Framework",
-        "Multitier Architecture",
-        "Management",
+      categories: [
+        {
+          name: "Backend",
+          items: [
+            ".NET Core",
+            "Node.js",
+            "Entity Framework",
+            "Multitier Architecture",
+            "Microservices",
+          ],
+        },
+        {
+          name: "Veritabanı",
+          items: ["MSSQL", "MySQL", "MongoDB", "PostgreSQL"],
+        },
+        {
+          name: "AI & ML",
+          items: ["RAG", "LLM Fine-tuning", "Similarity Metrics"],
+        },
+        {
+          name: "Mobil",
+          items: ["Flutter", "React-Native"],
+        },
+        {
+          name: "Soft Skills",
+          items: [
+            "Management",
+            "Organization",
+            "Innovative Thinking",
+            "Teamwork",
+          ],
+        },
       ],
     },
     projects: {
@@ -117,6 +143,13 @@ export const translations = {
       live: "Canlı",
       viewOnGitHub: "GitHub'da gör",
       items: [
+        {
+          title: "Employee Performance Evaluation Tracking",
+          description:
+            "Çalışan performansını kaydetmek isteyen şirketler için geliştirilmiş performans değerlendirme ve takip sistemi.",
+          tech: ["Node.js", "Clean Architecture", "Microservices"],
+          github: null as string | null,
+        },
         {
           title: "Kumsal Restaurant",
           description:
@@ -129,7 +162,7 @@ export const translations = {
           description:
             ".NET Framework, MSSQL ve Entity Framework ile masaüstü fitness yönetim uygulaması.",
           tech: [".NET", "MSSQL", "Entity Framework"],
-          github: "https://github.com/suleymanngulter/fitness-otomasyonu"
+          github: "https://github.com/suleymanngulter/fitness-otomasyonu",
         },
         {
           title: "Library Automation",
@@ -142,7 +175,7 @@ export const translations = {
           description:
             ".NET Core Web API, Entity Framework, MySQL, REST API ve Authentication ile masaüstü finansal yönetim uygulaması.",
           tech: [".NET Core", "Entity Framework", "MySQL", "REST API"],
-          github: "https://github.com/suleymanngulter/GelirGiderAnalizi"
+          github: "https://github.com/suleymanngulter/GelirGiderAnalizi",
         },
         {
           title: "Assistant API",
@@ -177,15 +210,15 @@ export const translations = {
     contact: {
       title: "İletişime Geçin",
       subtitle: "Projeleriniz veya işbirliği için benimle iletişime geçebilirsiniz.",
-      location: "Yalova, Kocaeli, Bursa",
+      location: "İstanbul, Kocaeli",
     },
     footer: {
       rights: "Tüm hakları saklıdır.",
     },
     meta: {
-      title: "Süleyman Gülter | Backend Developer",
+      title: "Süleyman Gülter | Software Engineer",
       description:
-        "Süleyman Gülter - Backend Developer. Projelerim, deneyimlerim ve iletişim bilgilerim.",
+        "Süleyman Gülter - Software Engineer. Projelerim, deneyimlerim ve iletişim bilgilerim.",
     },
   },
   en: {
@@ -200,7 +233,7 @@ export const translations = {
     hero: {
       hello: "Hi, I'm",
       tagline:
-        "Backend Developer · .NET · Microservices · Building solutions focused on efficiency and sustainability.",
+        "Software Engineer · Node.js · .NET · Microservices · Building efficient, sustainable solutions.",
       viewProjects: "View Projects",
       getInTouch: "Get in Touch",
     },
@@ -240,11 +273,19 @@ export const translations = {
       projectLink: "Project link",
       items: [
         {
+          title: "Software Engineer",
+          period: "2026",
+          org: "Yukatech Bilişim A.Ş.",
+          description:
+            "Worked as a Software Engineer. Developed various projects in Backend, Clean Architecture, and Microservice Architecture with Node.js.",
+          link: null as string | null,
+        },
+        {
           title: "Entrepreneurship Marathon",
           period: "2025",
           org: "Düzce Teknopark",
           description:
-            "Participated as a finalist with the SATaiLITE flood risk detection system. Gained experience in entrepreneurship, business idea development, business models, and target audience identification.",
+            "Became one of the finalist teams with the SATaiLITE flood risk detection system idea. Gained experience in entrepreneurship, business idea development, business models, and target audience identification.",
           link: "https://github.com/suleymanngulter/SATaiLITE-StartUp",
         },
         {
@@ -252,7 +293,7 @@ export const translations = {
           period: "2024-2025",
           org: "Düzce University",
           description:
-            "During my tenure as Hackathon Coordinator, I learned through the interview process that the most productive team members are those open to self-improvement in all areas, rather than just those with high technical skills. Created an atmosphere within the team that encouraged open-mindedness and taught a solution-oriented perspective.",
+            "As Hackathon Coordinator, I restructured interview strategies by forming a team with high adaptability and openness to learning beyond technical competence. Built a solution-oriented perspective and open-minded culture, creating a dynamic atmosphere that efficiently manages crises.",
           link: null as string | null,
         },
         {
@@ -260,15 +301,7 @@ export const translations = {
           period: "2024",
           org: "Tersan Shipyard",
           description:
-            "Worked in the field of ERP Programming. Gained experience in Backend development with .NET Core Web API, Microservices Architecture, and DevOps processes.",
-          link: null as string | null,
-        },
-        {
-          title: "Mobile Developer Intern",
-          period: "2024",
-          org: "TBA Academy",
-          description:
-            "Completed an internship in Mobile application development using Flutter.",
+            "Worked in ERP Programming. Gained Backend development experience with .NET Core Web API, Microservices Architecture, and DevOps processes.",
           link: null as string | null,
         },
         {
@@ -279,25 +312,50 @@ export const translations = {
             "Ranked among the finalist teams with TarlaBot, an unmanned agricultural vehicle project. Gained significant experience in idea development and teamwork.",
           link: "https://github.com/suleymanngulter/TarlaBotStartUp",
         },
+        {
+          title: "Mobile Developer Intern",
+          period: "2024",
+          org: "TBA Academy",
+          description:
+            "Completed an internship in mobile application development with Flutter and developed a library automation application.",
+          link: null as string | null,
+        },
       ],
     },
     skills: {
       title: "Skills",
-      items: [
-        "Organization",
-        "Teamwork",
-        "Node.js",
-        ".NET",
-        "Presentation",
-        "Innovative Thinking",
-        "Flutter",
-        "Docker",
-        "Excel",
-        "Microservices",
-        "Java",
-        "Entity Framework",
-        "Multitier Architecture",
-        "Management",
+      categories: [
+        {
+          name: "Backend",
+          items: [
+            ".NET Core",
+            "Node.js",
+            "Entity Framework",
+            "Multitier Architecture",
+            "Microservices",
+          ],
+        },
+        {
+          name: "Database",
+          items: ["MSSQL", "MySQL", "MongoDB", "PostgreSQL"],
+        },
+        {
+          name: "AI & ML",
+          items: ["RAG", "LLM Fine-tuning", "Similarity Metrics"],
+        },
+        {
+          name: "Mobile",
+          items: ["Flutter", "React-Native"],
+        },
+        {
+          name: "Soft Skills",
+          items: [
+            "Management",
+            "Organization",
+            "Innovative Thinking",
+            "Teamwork",
+          ],
+        },
       ],
     },
     projects: {
@@ -305,6 +363,13 @@ export const translations = {
       live: "Live",
       viewOnGitHub: "View on GitHub",
       items: [
+        {
+          title: "Employee Performance Evaluation Tracking",
+          description:
+            "A performance evaluation and tracking system developed for companies that want to record their employees' performance.",
+          tech: ["Node.js", "Clean Architecture", "Microservices"],
+          github: null as string | null,
+        },
         {
           title: "Kumsal Restaurant",
           description:
@@ -367,15 +432,15 @@ export const translations = {
       title: "Get in Touch",
       subtitle:
         "Feel free to reach out for projects or collaboration opportunities.",
-      location: "Yalova, Kocaeli, Bursa",
+      location: "Istanbul, Kocaeli",
     },
     footer: {
       rights: "All rights reserved.",
     },
     meta: {
-      title: "Süleyman Gülter | Backend Developer",
+      title: "Süleyman Gülter | Software Engineer",
       description:
-        "Süleyman Gülter - Backend Developer. My projects, experience, and contact information.",
+        "Süleyman Gülter - Software Engineer. My projects, experience, and contact information.",
     },
   },
 } as const;
