@@ -48,7 +48,7 @@ function LanguageSwitcher({
       onClick={() => setLanguage(switchTo)}
       title={title}
       aria-label={title}
-      className="rounded-md border border-border bg-surface p-2 transition-colors hover:border-primary hover:bg-primary-soft"
+      className="rounded-lg border border-border bg-surface p-2.5 transition-colors hover:border-primary hover:bg-primary-soft"
     >
       <span className="inline-block text-[1.25rem] leading-none" role="img" aria-hidden>
         {flag}
@@ -64,7 +64,7 @@ function ThemeToggle({ isDark, toggle }: { isDark: boolean; toggle: () => void }
       onClick={toggle}
       title={isDark ? "Açık moda geç" : "Koyu moda geç"}
       aria-label={isDark ? "Açık moda geç" : "Koyu moda geç"}
-      className="relative flex h-9 w-16 shrink-0 items-center rounded-full border border-border bg-surface p-1 transition-colors hover:border-primary/50"
+      className="relative flex h-10 w-16 shrink-0 items-center rounded-full border border-border bg-surface p-1 transition-colors hover:border-primary/50"
     >
       <span
         className={`absolute top-1 flex h-7 w-7 items-center justify-center rounded-full bg-primary text-white shadow-sm transition-all duration-300 ${
@@ -98,10 +98,9 @@ function MoonIcon({ className }: { className?: string }) {
 
 function SectionHeader({ label, title }: { label: string; title: string }) {
   return (
-    <div className="mb-8 sm:mb-10">
-      <p className="section-label mb-2">{label}</p>
+    <div className="mb-12 max-w-2xl sm:mb-16">
+      <p className="section-label mb-4">{label}</p>
       <h2 className="section-title">{title}</h2>
-      <div className="mt-4 h-1 w-16 rounded-full bg-primary" />
     </div>
   );
 }
@@ -158,17 +157,20 @@ export default function Home() {
   const roleLabel = lang === "tr" ? "Yazılım Mühendisi" : "Software Engineer";
 
   return (
-    <div className="agentic-bg min-h-screen text-foreground">
-      <header className="fixed top-0 left-0 right-0 z-50 border-b border-border bg-surface/85 backdrop-blur-lg">
-        <nav className="mx-auto flex max-w-5xl items-center justify-between px-4 py-3 sm:px-6">
-          <a href="#" className="font-display text-lg font-bold text-primary">
-            SG.
+    <div className="spacious-page min-h-screen text-foreground">
+      <header className="fixed top-0 left-0 right-0 z-50 border-b border-border/70 bg-page/80 backdrop-blur-md">
+        <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-5 sm:px-8 lg:px-10">
+          <a href="#" className="font-display text-xl font-bold tracking-tight text-foreground">
+            Süleyman Gülter
           </a>
-          <div className="hidden items-center gap-8 lg:flex">
-            <ul className="flex gap-6">
+          <div className="hidden items-center gap-10 lg:flex">
+            <ul className="flex gap-8">
               {navIds.map(({ href, key }) => (
                 <li key={href}>
-                  <a href={href} className="font-mono text-[11px] font-medium uppercase tracking-widest text-muted transition-colors hover:text-primary">
+                  <a
+                    href={href}
+                    className="text-sm font-medium text-muted transition-colors hover:text-primary"
+                  >
                     {t.nav[key]}
                   </a>
                 </li>
@@ -187,21 +189,21 @@ export default function Home() {
               onClick={() => setMenuOpen((o) => !o)}
               aria-label={menuOpen ? "Menüyü kapat" : "Menüyü aç"}
               aria-expanded={menuOpen}
-              className="flex h-11 w-11 items-center justify-center rounded-md border border-border text-muted hover:border-primary hover:text-primary"
+              className="flex h-11 w-11 items-center justify-center rounded-lg border border-border text-muted hover:border-primary hover:text-primary"
             >
               {menuOpen ? "✕" : "☰"}
             </button>
           </div>
         </nav>
         {menuOpen && (
-          <div className="border-t border-border bg-surface px-4 py-3 lg:hidden">
+          <div className="border-t border-border bg-page px-6 py-4 lg:hidden">
             <ul className="flex flex-col gap-1">
               {navIds.map(({ href, key }) => (
                 <li key={href}>
                   <a
                     href={href}
                     onClick={() => setMenuOpen(false)}
-                    className="block min-h-[44px] rounded-md px-3 py-3 font-mono text-xs uppercase tracking-widest text-muted hover:bg-primary-soft hover:text-primary"
+                    className="block min-h-[48px] rounded-lg px-4 py-3 text-sm font-medium text-muted hover:bg-primary-soft hover:text-primary"
                   >
                     {t.nav[key]}
                   </a>
@@ -212,173 +214,213 @@ export default function Home() {
         )}
       </header>
 
-      <main className="mx-auto max-w-5xl px-4 sm:px-6">
-        {/* Hero — Agentic split layout */}
-        <section className="flex min-h-screen flex-col justify-center pb-20 pt-24 lg:pt-28">
-          <div className="grid items-center gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16">
-            <div>
-              <span className="mb-4 inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary-soft px-4 py-1.5 font-mono text-xs font-semibold uppercase tracking-widest text-primary">
-                <span className="h-2 w-2 animate-pulse rounded-full bg-primary" aria-hidden />
-                {roleLabel}
-              </span>
-              <p className="section-label mb-3">{t.hero.hello}</p>
-              <h1 className="font-display text-5xl font-bold leading-[1.05] tracking-tight sm:text-6xl md:text-7xl lg:text-8xl">
-                Süleyman
-                <span className="block text-primary">Gülter</span>
-              </h1>
-              <p className="mt-6 max-w-lg text-base leading-relaxed text-muted sm:text-lg">
-                {t.hero.tagline}
-              </p>
-              <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-                <a href="#projeler" className="agentic-btn-primary w-full sm:w-auto">
-                  {t.hero.viewProjects}
-                </a>
-                <a href="#iletisim" className="agentic-btn-outline w-full sm:w-auto">
-                  {t.hero.getInTouch}
-                </a>
-              </div>
-            </div>
-            <div className="agentic-card-accent hidden lg:block">
-              <p className="section-label mb-4">{lang === "tr" ? "Odak" : "Focus"}</p>
-              <ul className="space-y-4 font-mono text-sm">
-                {["Node.js", "Clean Architecture", "Microservices", ".NET Core", "AI / RAG"].map((item) => (
-                  <li key={item} className="flex items-center gap-3 border-b border-border pb-4 last:border-0 last:pb-0">
-                    <span className="text-primary">→</span>
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
+      <main>
+        {/* Hero — one composition, generous air */}
+        <section className="mx-auto flex min-h-screen max-w-6xl flex-col justify-center px-6 pb-24 pt-28 sm:px-8 lg:px-10 lg:pb-32 lg:pt-32">
+          <p className="section-label mb-6">{t.hero.hello}</p>
+          <h1 className="max-w-4xl font-display text-5xl font-bold leading-[1.08] tracking-tight text-foreground sm:text-6xl md:text-7xl lg:text-8xl">
+            Süleyman Gülter
+          </h1>
+          <p className="mt-4 font-display text-2xl font-medium text-primary sm:text-3xl md:text-4xl">
+            {roleLabel}
+          </p>
+          <p className="mt-8 max-w-2xl text-lg leading-relaxed text-muted sm:text-xl">
+            {t.hero.tagline}
+          </p>
+          <div className="mt-12 flex flex-col gap-4 sm:flex-row sm:items-center">
+            <a href="#projeler" className="spacious-btn-primary w-full sm:w-auto">
+              {t.hero.viewProjects}
+            </a>
+            <a href="#iletisim" className="spacious-btn-outline w-full sm:w-auto">
+              {t.hero.getInTouch}
+            </a>
           </div>
         </section>
 
-        <section id="hakkimda" className="border-t border-border py-16 sm:py-24">
-          <SectionHeader label={lang === "tr" ? "01 — Profil" : "01 — Profile"} title={t.about.title} />
-          <p className="max-w-3xl text-base leading-relaxed text-muted sm:text-lg md:text-xl">
-            {t.about.text}
-          </p>
+        <section id="hakkimda" className="border-t border-border">
+          <div className="mx-auto max-w-6xl px-6 py-24 sm:px-8 sm:py-32 lg:px-10">
+            <SectionHeader
+              label={lang === "tr" ? "01 — Profil" : "01 — Profile"}
+              title={t.about.title}
+            />
+            <p className="max-w-3xl text-lg leading-[1.8] text-muted sm:text-xl">
+              {t.about.text}
+            </p>
+          </div>
         </section>
 
-        <section id="egitim" className="border-t border-border py-16 sm:py-24">
-          <SectionHeader label={lang === "tr" ? "02 — Eğitim" : "02 — Education"} title={t.education.title} />
-          <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {t.education.items.map((edu) => (
-              <li key={edu.school} className="agentic-card">
-                <h3 className="font-display text-xl font-semibold">{edu.school}</h3>
-                <p className="mt-1 font-mono text-xs uppercase tracking-wider text-primary">{edu.years}</p>
-                {edu.program && <p className="mt-2 text-sm text-muted">{edu.program}</p>}
-                {edu.gpa && (
-                  <p className="mt-2 font-mono text-sm text-muted">
-                    {t.education.gpa}: <span className="font-semibold text-foreground">{edu.gpa}</span>
+        <section id="egitim" className="border-t border-border bg-surface">
+          <div className="mx-auto max-w-6xl px-6 py-24 sm:px-8 sm:py-32 lg:px-10">
+            <SectionHeader
+              label={lang === "tr" ? "02 — Eğitim" : "02 — Education"}
+              title={t.education.title}
+            />
+            <ul className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 lg:gap-10">
+              {t.education.items.map((edu) => (
+                <li key={edu.school} className="space-y-3">
+                  <h3 className="font-display text-xl font-semibold">{edu.school}</h3>
+                  <p className="font-mono text-xs uppercase tracking-wider text-primary">
+                    {edu.years}
                   </p>
-                )}
-                {edu.extra && <p className="mt-1 text-sm text-muted">{edu.extra}</p>}
-              </li>
-            ))}
-          </ul>
+                  {edu.program && <p className="text-muted">{edu.program}</p>}
+                  {edu.gpa && (
+                    <p className="text-sm text-muted">
+                      {t.education.gpa}:{" "}
+                      <span className="font-semibold text-foreground">{edu.gpa}</span>
+                    </p>
+                  )}
+                  {edu.extra && <p className="text-sm text-muted">{edu.extra}</p>}
+                </li>
+              ))}
+            </ul>
+          </div>
         </section>
 
-        <section id="deneyim" className="border-t border-border py-16 sm:py-24">
-          <SectionHeader label={lang === "tr" ? "03 — Kariyer" : "03 — Career"} title={t.experience.title} />
-          <ul className="relative space-y-0">
-            <div className="absolute bottom-4 left-[7px] top-4 hidden w-0.5 bg-primary/30 sm:block" aria-hidden />
-            {t.experience.items.map((exp, i) => (
-              <li key={exp.title + exp.period} className="relative pb-8 sm:pl-10 sm:pb-10">
-                <span className="absolute left-0 top-2 hidden h-4 w-4 rounded-full border-2 border-primary bg-surface sm:block" aria-hidden />
-                <div className={`agentic-card ${i === 0 ? "border-primary/40 bg-primary-soft/30" : ""}`}>
-                  <div className="mb-2 flex flex-wrap items-start justify-between gap-2">
-                    <h3 className="font-display text-xl font-semibold">{exp.title}</h3>
-                    <span className="font-mono text-xs uppercase tracking-wider text-primary">{exp.period}</span>
+        <section id="deneyim" className="border-t border-border">
+          <div className="mx-auto max-w-6xl px-6 py-24 sm:px-8 sm:py-32 lg:px-10">
+            <SectionHeader
+              label={lang === "tr" ? "03 — Kariyer" : "03 — Career"}
+              title={t.experience.title}
+            />
+            <ul className="mx-auto max-w-3xl space-y-16">
+              {t.experience.items.map((exp) => (
+                <li key={exp.title + exp.period} className="space-y-4">
+                  <div className="flex flex-wrap items-baseline justify-between gap-3">
+                    <h3 className="font-display text-2xl font-semibold">{exp.title}</h3>
+                    <span className="font-mono text-xs uppercase tracking-wider text-primary">
+                      {exp.period}
+                    </span>
                   </div>
-                  <p className="mb-2 text-sm font-medium text-muted">{exp.org}</p>
-                  <p className="text-sm leading-relaxed text-muted">{exp.description}</p>
+                  <p className="text-base font-medium text-muted">{exp.org}</p>
+                  <p className="max-w-2xl text-base leading-relaxed text-muted">
+                    {exp.description}
+                  </p>
                   {exp.link && (
-                    <a href={exp.link} target="_blank" rel="noreferrer" className="mt-3 inline-block text-sm font-semibold text-primary hover:underline">
+                    <a
+                      href={exp.link}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="inline-block text-sm font-semibold text-primary hover:underline"
+                    >
                       {t.experience.projectLink} →
                     </a>
                   )}
-                </div>
-              </li>
-            ))}
-          </ul>
-        </section>
-
-        <section id="beceriler" className="border-t border-border py-16 sm:py-24">
-          <SectionHeader label={lang === "tr" ? "04 — Yetkinlik" : "04 — Skills"} title={t.skills.title} />
-          <div className="grid gap-4 sm:grid-cols-2">
-            {t.skills.categories.map((category) => (
-              <div key={category.name} className="agentic-card">
-                <h3 className="section-label mb-3">{category.name}</h3>
-                <ul className="flex flex-wrap gap-2">
-                  {category.items.map((skill) => (
-                    <li key={skill} className="rounded-md bg-secondary px-3 py-1.5 font-mono text-xs text-foreground">
-                      {skill}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
+                </li>
+              ))}
+            </ul>
           </div>
         </section>
 
-        <section id="projeler" className="border-t border-border py-16 sm:py-24">
-          <SectionHeader label={lang === "tr" ? "05 — Projeler" : "05 — Projects"} title={t.projects.title} />
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {t.projects.items.map((project, i) => {
-              const href = project.github ?? null;
-              const Wrapper = href ? "a" : "article";
-              const isFeatured = i === 0;
-              return (
-                <Wrapper
-                  key={project.title}
-                  {...(href ? { href, target: "_blank", rel: "noreferrer" } : {})}
-                  className={`agentic-card flex flex-col ${isFeatured ? "sm:col-span-2 lg:col-span-3 border-primary/30 bg-primary-soft/20" : ""} ${href ? "hover:border-primary" : ""}`}
-                >
-                  {isFeatured && (
-                    <span className="section-label mb-2">{lang === "tr" ? "Güncel" : "Latest"}</span>
-                  )}
-                  <h3 className="font-display text-lg font-semibold sm:text-xl">{project.title}</h3>
-                  <p className="mb-4 mt-2 flex-1 text-sm leading-relaxed text-muted">{project.description}</p>
-                  <div className="mb-3 flex flex-wrap gap-2">
-                    {project.tech.map((tech) => (
-                      <span key={tech} className="rounded bg-primary/10 px-2 py-0.5 font-mono text-xs text-primary">
-                        {tech}
-                      </span>
+        <section id="beceriler" className="border-t border-border bg-surface">
+          <div className="mx-auto max-w-6xl px-6 py-24 sm:px-8 sm:py-32 lg:px-10">
+            <SectionHeader
+              label={lang === "tr" ? "04 — Yetkinlik" : "04 — Skills"}
+              title={t.skills.title}
+            />
+            <div className="grid gap-12 sm:grid-cols-2 lg:gap-16">
+              {t.skills.categories.map((category) => (
+                <div key={category.name}>
+                  <h3 className="section-label mb-5">{category.name}</h3>
+                  <ul className="flex flex-wrap gap-3">
+                    {category.items.map((skill) => (
+                      <li
+                        key={skill}
+                        className="rounded-lg border border-border px-4 py-2 text-sm text-foreground"
+                      >
+                        {skill}
+                      </li>
                     ))}
-                  </div>
-                  {href && (
-                    <span className="text-sm font-semibold text-primary">{t.projects.viewOnGitHub} →</span>
-                  )}
-                </Wrapper>
-              );
-            })}
+                  </ul>
+                </div>
+              ))}
+            </div>
           </div>
         </section>
 
-        <section id="iletisim" className="border-t border-border py-16 sm:py-24">
-          <SectionHeader label={lang === "tr" ? "06 — İletişim" : "06 — Contact"} title={t.contact.title} />
-          <p className="mb-8 max-w-xl text-muted">{t.contact.subtitle}</p>
-          <div className="agentic-card-accent max-w-2xl">
-            <div className="grid gap-4 sm:grid-cols-2">
-              <a href="mailto:suleymangulter2@gmail.com" className="flex min-h-[44px] items-center gap-3 text-primary hover:underline">
+        <section id="projeler" className="border-t border-border">
+          <div className="mx-auto max-w-6xl px-6 py-24 sm:px-8 sm:py-32 lg:px-10">
+            <SectionHeader
+              label={lang === "tr" ? "05 — Projeler" : "05 — Projects"}
+              title={t.projects.title}
+            />
+            <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 lg:gap-10">
+              {t.projects.items.map((project) => {
+                const href = project.github ?? null;
+                const Wrapper = href ? "a" : "article";
+                return (
+                  <Wrapper
+                    key={project.title}
+                    {...(href ? { href, target: "_blank", rel: "noreferrer" } : {})}
+                    className={`spacious-card flex flex-col ${href ? "hover:border-primary" : ""}`}
+                  >
+                    <h3 className="font-display text-xl font-semibold">{project.title}</h3>
+                    <p className="mb-6 mt-4 flex-1 text-sm leading-relaxed text-muted">
+                      {project.description}
+                    </p>
+                    <div className="mb-4 flex flex-wrap gap-2">
+                      {project.tech.map((tech) => (
+                        <span
+                          key={tech}
+                          className="rounded-md bg-primary-soft px-2.5 py-1 font-mono text-xs text-primary"
+                        >
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
+                    {href && (
+                      <span className="text-sm font-semibold text-primary">
+                        {t.projects.viewOnGitHub} →
+                      </span>
+                    )}
+                  </Wrapper>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+
+        <section id="iletisim" className="border-t border-border bg-surface">
+          <div className="mx-auto max-w-6xl px-6 py-24 sm:px-8 sm:py-32 lg:px-10">
+            <SectionHeader
+              label={lang === "tr" ? "06 — İletişim" : "06 — Contact"}
+              title={t.contact.title}
+            />
+            <p className="mb-12 max-w-xl text-lg text-muted">{t.contact.subtitle}</p>
+            <div className="grid max-w-2xl gap-6 sm:grid-cols-2">
+              <a
+                href="mailto:suleymangulter2@gmail.com"
+                className="flex min-h-[48px] items-center gap-3 text-primary hover:underline"
+              >
                 <MailIcon className="h-5 w-5 shrink-0" />
                 <span className="break-all text-sm">suleymangulter2@gmail.com</span>
               </a>
-              <a href="https://github.com/suleymanngulter/" target="_blank" rel="noreferrer" className="flex min-h-[44px] items-center gap-3 text-muted hover:text-primary">
+              <a
+                href="https://github.com/suleymanngulter/"
+                target="_blank"
+                rel="noreferrer"
+                className="flex min-h-[48px] items-center gap-3 text-muted transition-colors hover:text-primary"
+              >
                 <GitHubIcon className="h-5 w-5 shrink-0 text-primary" />
                 GitHub
               </a>
-              <a href="https://www.linkedin.com/in/suleymanngulter/" target="_blank" rel="noreferrer" className="flex min-h-[44px] items-center gap-3 text-muted hover:text-primary">
+              <a
+                href="https://www.linkedin.com/in/suleymanngulter/"
+                target="_blank"
+                rel="noreferrer"
+                className="flex min-h-[48px] items-center gap-3 text-muted transition-colors hover:text-primary"
+              >
                 <LinkedInIcon className="h-5 w-5 shrink-0 text-primary" />
                 LinkedIn
               </a>
             </div>
-            <p className="mt-6 font-mono text-xs uppercase tracking-widest text-muted">{t.contact.location}</p>
+            <p className="mt-12 font-mono text-xs uppercase tracking-widest text-muted">
+              {t.contact.location}
+            </p>
           </div>
         </section>
       </main>
 
-      <footer className="border-t border-border py-8 text-center text-sm text-muted">
+      <footer className="border-t border-border px-6 py-10 text-center text-sm text-muted">
         © {new Date().getFullYear()} Süleyman Gülter. {t.footer.rights}
       </footer>
     </div>
