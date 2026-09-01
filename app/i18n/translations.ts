@@ -208,9 +208,18 @@ export const translations = {
       ],
     },
     contact: {
-      title: "İletişime Geçin",
+      title: "Hazır mısınız?",
       subtitle: "Projeleriniz veya işbirliği için benimle iletişime geçebilirsiniz.",
       location: "İstanbul, Kocaeli",
+      eyebrow: "İletişim",
+      formTitle: "Bir mesaj bırakın",
+      formHint: "E-posta veya LinkedIn üzerinden dönüş yapıyorum.",
+      send: "E-posta gönder",
+      points: [
+        "Node.js ve .NET ile backend",
+        "Mikroservis ve clean architecture",
+        "Hızlı, net iletişim",
+      ],
     },
     footer: {
       rights: "Tüm hakları saklıdır.",
@@ -429,10 +438,19 @@ export const translations = {
       ],
     },
     contact: {
-      title: "Get in Touch",
+      title: "Ready to ship together?",
       subtitle:
         "Feel free to reach out for projects or collaboration opportunities.",
       location: "Istanbul, Kocaeli",
+      eyebrow: "Get started",
+      formTitle: "Create a conversation",
+      formHint: "I reply via email or LinkedIn.",
+      send: "Send email",
+      points: [
+        "Backend with Node.js and .NET",
+        "Microservices and clean architecture",
+        "Clear, fast communication",
+      ],
     },
     footer: {
       rights: "All rights reserved.",

@@ -40,7 +40,6 @@ function LanguageSwitcher({
   const isEnglish = lang === "en";
   const switchTo = isEnglish ? "tr" : "en";
   const title = isEnglish ? "Türkçe'ye geç" : "Switch to English";
-  const flag = isEnglish ? "🇹🇷" : "🇬🇧";
 
   return (
     <button
@@ -48,11 +47,9 @@ function LanguageSwitcher({
       onClick={() => setLanguage(switchTo)}
       title={title}
       aria-label={title}
-      className="spacious-btn-outline min-h-[44px] px-3 py-2"
+      className="sp-btn-text"
     >
-      <span className="text-[1.25rem] leading-none" role="img" aria-hidden>
-        {flag}
-      </span>
+      {isEnglish ? "TR" : "EN"}
     </button>
   );
 }
@@ -65,19 +62,16 @@ function ThemeToggle({ isLight, toggle }: { isLight: boolean; toggle: () => void
       title={isLight ? "Koyu moda geç" : "Açık moda geç"}
       aria-label={isLight ? "Koyu moda geç" : "Açık moda geç"}
       aria-pressed={isLight}
-      className={`spacious-theme-toggle${isLight ? " is-light" : ""}`}
+      className="sp-btn-icon"
     >
-      <span className="spacious-theme-thumb" aria-hidden>
-        {isLight ? <SunIcon className="h-4 w-4" /> : <MoonIcon className="h-4 w-4" />}
-      </span>
-      <span className="sr-only">{isLight ? "Açık mod" : "Koyu mod"}</span>
+      {isLight ? <SunIcon className="h-4 w-4" /> : <MoonIcon className="h-4 w-4" />}
     </button>
   );
 }
 
 function SunIcon({ className }: { className?: string }) {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden>
       <circle cx="12" cy="12" r="4" />
       <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41" />
     </svg>
@@ -86,35 +80,26 @@ function SunIcon({ className }: { className?: string }) {
 
 function MoonIcon({ className }: { className?: string }) {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden>
       <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
     </svg>
   );
 }
 
-function SectionIntro({
-  eyebrow,
-  title,
-  centered = true,
-}: {
-  eyebrow: string;
-  title: string;
-  centered?: boolean;
-}) {
+function CheckIcon() {
   return (
-    <div className={`mb-16 md:mb-20 lg:mb-24 ${centered ? "mx-auto max-w-3xl text-center" : "max-w-2xl"}`}>
-      <p className="spacious-eyebrow mb-4">{eyebrow}</p>
-      <h2 className="spacious-heading-lg">{title}</h2>
-    </div>
+    <span className="sp-check" aria-hidden>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className="h-3 w-3">
+        <path d="M20 6 9 17l-5-5" />
+      </svg>
+    </span>
   );
 }
 
 function readStoredTheme(): boolean {
   if (typeof window === "undefined") return false;
   const stored = localStorage.getItem(THEME_STORAGE_KEY);
-  if (stored === "dark") {
-    localStorage.setItem(THEME_STORAGE_KEY, "demo");
-  }
+  if (stored === "dark") localStorage.setItem(THEME_STORAGE_KEY, "demo");
   return stored === "light";
 }
 
@@ -138,9 +123,7 @@ export default function Home() {
     const fromUrl = searchParams.get("lang");
     if (fromUrl === "en" || fromUrl === "tr") {
       setLang(fromUrl);
-      if (typeof window !== "undefined") {
-        localStorage.setItem(LOCALE_STORAGE_KEY, fromUrl);
-      }
+      if (typeof window !== "undefined") localStorage.setItem(LOCALE_STORAGE_KEY, fromUrl);
     } else if (typeof window !== "undefined") {
       const stored = localStorage.getItem(LOCALE_STORAGE_KEY);
       const next = (stored === "en" || stored === "tr" ? stored : getLocaleFromBrowser()) as Locale;
@@ -164,64 +147,67 @@ export default function Home() {
   }
 
   const t = translations[lang];
-  const roleLabel = lang === "tr" ? "Yazılım Mühendisi" : "Software Engineer";
 
   return (
-    <div className="spacious-shell spacious-hero-glow min-h-screen">
-      <header className="spacious-header fixed top-0 left-0 right-0 z-50">
-        <nav className="spacious-container flex items-center justify-between py-6 md:py-8">
-          <a href="#" className="spacious-logo">
-            <span className="spacious-logo-mark" aria-hidden>+</span>
-            Süleyman Gülter
+    <div className="sp-shell">
+      <header className="sp-header">
+        <nav className="sp-container sp-nav" aria-label="Primary">
+          <a href="#" className="sp-logo" aria-label="Süleyman Gülter">
+            <img src="/logo-mark.png" alt="" className="sp-logo-mark-img" width={36} height={52} />
+            <img
+              src="/logo-wordmark.png"
+              alt="Süleyman Gülter"
+              className="sp-logo-wordmark"
+              width={188}
+              height={28}
+            />
           </a>
-          <div className="hidden items-center gap-10 lg:flex">
-            <ul className="flex gap-8">
-              {navIds.map(({ href, key }) => (
-                <li key={href}>
-                  <a href={href} className="spacious-nav-link">
-                    {t.nav[key]}
-                  </a>
-                </li>
-              ))}
-            </ul>
-            <div className="flex items-center gap-3">
-              <ThemeToggle isLight={isLight} toggle={() => setIsLight((p) => !p)} />
-              <LanguageSwitcher lang={lang} setLanguage={setLanguage} />
-              <a href="#iletisim" className="spacious-btn-primary">
-                {t.hero.getInTouch}
-              </a>
-            </div>
-          </div>
-          <div className="flex items-center gap-2 lg:hidden">
+          <ul className="sp-nav-links">
+            {navIds.map(({ href, key }) => (
+              <li key={href}>
+                <a href={href} className="sp-nav-link">
+                  {t.nav[key]}
+                </a>
+              </li>
+            ))}
+          </ul>
+          <div className="sp-nav-actions">
             <ThemeToggle isLight={isLight} toggle={() => setIsLight((p) => !p)} />
             <LanguageSwitcher lang={lang} setLanguage={setLanguage} />
+            <a href="#iletisim" className="sp-btn sp-btn-primary sp-desktop-cta">
+              {t.hero.getInTouch}
+            </a>
             <button
               type="button"
               onClick={() => setMenuOpen((o) => !o)}
               aria-label={menuOpen ? "Menüyü kapat" : "Menüyü aç"}
               aria-expanded={menuOpen}
-              className="spacious-btn-outline min-h-[44px] min-w-[44px] px-3"
+              className="sp-btn-icon sp-menu-btn"
             >
-              {menuOpen ? "✕" : "☰"}
+              {menuOpen ? (
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="h-4 w-4" aria-hidden>
+                  <path d="M18 6 6 18M6 6l12 12" />
+                </svg>
+              ) : (
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="h-4 w-4" aria-hidden>
+                  <path d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+              )}
             </button>
           </div>
         </nav>
         {menuOpen && (
-          <div className="spacious-divider border-t spacious-shell px-8 py-6 lg:hidden">
-            <ul className="flex flex-col gap-2">
+          <div className="sp-mobile-menu sp-mobile-panel">
+            <ul className="flex flex-col gap-1">
               {navIds.map(({ href, key }) => (
                 <li key={href}>
-                  <a
-                    href={href}
-                    onClick={() => setMenuOpen(false)}
-                    className="block min-h-[48px] rounded-lg px-4 py-3 spacious-nav-link"
-                  >
+                  <a href={href} onClick={() => setMenuOpen(false)} className="block min-h-12 px-2 py-3 sp-nav-link">
                     {t.nav[key]}
                   </a>
                 </li>
               ))}
-              <li className="pt-2">
-                <a href="#iletisim" onClick={() => setMenuOpen(false)} className="spacious-btn-primary w-full">
+              <li className="pt-4">
+                <a href="#iletisim" onClick={() => setMenuOpen(false)} className="sp-btn sp-btn-primary w-full">
                   {t.hero.getInTouch}
                 </a>
               </li>
@@ -231,59 +217,108 @@ export default function Home() {
       </header>
 
       <main>
-        <section className="spacious-section spacious-container flex min-h-screen flex-col items-center justify-center pt-28 text-center md:pt-32">
-          <p className="spacious-eyebrow mb-6">{t.hero.hello}</p>
-          <h1 className="spacious-heading-xl max-w-4xl">Süleyman Gülter</h1>
-          <p className="spacious-role mt-6">{roleLabel}</p>
-          <p className="spacious-body-lg mx-auto mt-8 max-w-2xl">{t.hero.tagline}</p>
-          <div className="mt-12 flex w-full max-w-md flex-col gap-4 sm:max-w-none sm:flex-row sm:justify-center">
-            <a href="#projeler" className="spacious-btn-primary w-full sm:w-auto">
-              {t.hero.viewProjects}
+        <section className="sp-hero sp-container">
+          <p className="sp-eyebrow mb-6">{t.hero.hello}</p>
+          <h1 className="sp-h1 max-w-5xl">Süleyman Gülter</h1>
+          <p className="sp-lead mx-auto mb-10">{t.hero.tagline}</p>
+          <div className="sp-cta-row">
+            <a href="#projeler" className="sp-btn sp-btn-primary w-full sm:w-auto">
+              {t.hero.viewProjects} →
             </a>
-            <a href="#iletisim" className="spacious-btn-outline w-full sm:w-auto">
+            <a href="#iletisim" className="sp-btn sp-btn-ghost w-full sm:w-auto">
               {t.hero.getInTouch}
             </a>
           </div>
         </section>
 
-        <section id="hakkimda" className="spacious-section spacious-container">
-          <SectionIntro eyebrow={lang === "tr" ? "Profil" : "Profile"} title={t.about.title} />
-          <p className="spacious-body-lg mx-auto max-w-3xl text-center">{t.about.text}</p>
+        <section id="hakkimda" className="sp-section sp-container">
+          <p className="sp-eyebrow mb-4 text-center">{lang === "tr" ? "Profil" : "Profile"}</p>
+          <h2 className="sp-h2 mx-auto max-w-3xl text-center">{t.about.title}</h2>
+          <p className="sp-lead mx-auto mb-16 text-center md:mb-20">{t.about.text}</p>
+          <div className="sp-grid md:grid-cols-3">
+            <article>
+              <span className="sp-icon-ring" aria-hidden>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" className="h-5 w-5">
+                  <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
+                  <circle cx="12" cy="10" r="3" />
+                </svg>
+              </span>
+              <h3 className="sp-h4">{t.contact.location}</h3>
+              <p className="sp-body">
+                {lang === "tr"
+                  ? "Düzce Üniversitesi Bilgisayar Mühendisliği. GPA 3.19."
+                  : "Computer Engineering at Düzce University. GPA 3.19."}
+              </p>
+            </article>
+            <article>
+              <span className="sp-icon-ring" aria-hidden>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" className="h-5 w-5">
+                  <polyline points="16 18 22 12 16 6" />
+                  <polyline points="8 6 2 12 8 18" />
+                </svg>
+              </span>
+              <h3 className="sp-h4">Backend</h3>
+              <p className="sp-body">
+                {lang === "tr"
+                  ? "Node.js, .NET Core, clean architecture ve mikroservis."
+                  : "Node.js, .NET Core, clean architecture, and microservices."}
+              </p>
+            </article>
+            <article>
+              <span className="sp-icon-ring" aria-hidden>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" className="h-5 w-5">
+                  <path d="M12 20h9" />
+                  <path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z" />
+                </svg>
+              </span>
+              <h3 className="sp-h4">{lang === "tr" ? "Odak" : "Focus"}</h3>
+              <p className="sp-body">
+                {lang === "tr"
+                  ? "Verimlilik, sürdürülebilirlik ve toplumsal fayda."
+                  : "Efficiency, sustainability, and social benefit."}
+              </p>
+            </article>
+          </div>
         </section>
 
-        <section id="egitim" className="spacious-section spacious-container">
-          <SectionIntro eyebrow={lang === "tr" ? "Eğitim" : "Education"} title={t.education.title} />
-          <ul className="spacious-grid md:grid-cols-2 lg:grid-cols-3">
+        <section id="egitim" className="sp-section sp-container">
+          <p className="sp-eyebrow mb-4 text-center">{lang === "tr" ? "Eğitim" : "Education"}</p>
+          <h2 className="sp-h2 text-center">{t.education.title}</h2>
+          <ul className="sp-grid md:grid-cols-3">
             {t.education.items.map((edu) => (
-              <li key={edu.school} className="spacious-card">
-                <h3 className="spacious-heading-md">{edu.school}</h3>
-                <p className="spacious-eyebrow mt-4">{edu.years}</p>
-                {edu.program && <p className="spacious-body mt-4">{edu.program}</p>}
+              <li key={edu.school} className="sp-card">
+                <h3 className="sp-h4 mb-4">{edu.school}</h3>
+                <p className="sp-caption mb-6">{edu.years}</p>
+                {edu.program && <p className="sp-body mb-4">{edu.program}</p>}
                 {edu.gpa && (
-                  <p className="spacious-body mt-3">
-                    {t.education.gpa}: <strong>{edu.gpa}</strong>
+                  <p className="sp-body">
+                    {t.education.gpa}: {edu.gpa}
                   </p>
                 )}
-                {edu.extra && <p className="spacious-body mt-2 text-sm">{edu.extra}</p>}
+                {edu.extra && <p className="sp-caption mt-4">{edu.extra}</p>}
               </li>
             ))}
           </ul>
         </section>
 
-        <section id="deneyim" className="spacious-section spacious-container">
-          <SectionIntro eyebrow={lang === "tr" ? "Kariyer" : "Career"} title={t.experience.title} />
-          <ul className="spacious-grid mx-auto max-w-4xl">
+        <section id="deneyim" className="sp-section sp-container">
+          <p className="sp-eyebrow mb-4 text-center">{lang === "tr" ? "Kariyer" : "Career"}</p>
+          <h2 className="sp-h2 text-center">{t.experience.title}</h2>
+          <ul className="sp-grid md:grid-cols-2 lg:grid-cols-3">
             {t.experience.items.map((exp) => (
-              <li key={exp.title + exp.period} className="spacious-card">
-                <div className="flex flex-wrap items-start justify-between gap-4">
-                  <h3 className="spacious-heading-md">{exp.title}</h3>
-                  <span className="spacious-tag-accent">{exp.period}</span>
-                </div>
-                <p className="spacious-text-primary mt-4 text-base font-normal">{exp.org}</p>
-                <p className="spacious-body mt-6 max-w-3xl">{exp.description}</p>
+              <li key={exp.title + exp.period} className="sp-card flex flex-col">
+                <p className="sp-quote" aria-hidden>
+                  ”
+                </p>
+                <h3 className="sp-h4">{exp.title}</h3>
+                <p className="sp-body flex-1">{exp.description}</p>
+                <p className="mt-8 text-sm text-[var(--text)]">
+                  {exp.org}
+                  <span className="sp-caption"> · {exp.period}</span>
+                </p>
                 {exp.link && (
-                  <a href={exp.link} target="_blank" rel="noreferrer" className="spacious-link mt-6 inline-block">
-                    {t.experience.projectLink} →
+                  <a href={exp.link} target="_blank" rel="noreferrer" className="sp-link mt-4">
+                    {t.experience.projectLink} ↗
                   </a>
                 )}
               </li>
@@ -291,16 +326,18 @@ export default function Home() {
           </ul>
         </section>
 
-        <section id="beceriler" className="spacious-section spacious-container">
-          <SectionIntro eyebrow={lang === "tr" ? "Yetkinlik" : "Skills"} title={t.skills.title} />
-          <div className="spacious-grid md:grid-cols-2">
+        <section id="beceriler" className="sp-section sp-container">
+          <p className="sp-eyebrow mb-4 text-center">{lang === "tr" ? "Yetkinlik" : "Skills"}</p>
+          <h2 className="sp-h2 text-center">{t.skills.title}</h2>
+          <div className="sp-grid md:grid-cols-2">
             {t.skills.categories.map((category) => (
-              <div key={category.name}>
-                <h3 className="spacious-eyebrow mb-6">{category.name}</h3>
-                <ul className="flex flex-wrap gap-3 md:gap-4">
+              <div key={category.name} className="sp-card">
+                <h3 className="sp-h4">{category.name}</h3>
+                <ul className="flex flex-col gap-4">
                   {category.items.map((skill) => (
-                    <li key={skill} className="spacious-tag">
-                      {skill}
+                    <li key={skill} className="flex items-start gap-3 text-[var(--text)]">
+                      <CheckIcon />
+                      <span>{skill}</span>
                     </li>
                   ))}
                 </ul>
@@ -309,96 +346,92 @@ export default function Home() {
           </div>
         </section>
 
-        <section id="projeler" className="spacious-section spacious-container">
-          <SectionIntro eyebrow={lang === "tr" ? "Projeler" : "Projects"} title={t.projects.title} />
-          <div className="spacious-grid md:grid-cols-2 lg:grid-cols-3">
-            {t.projects.items.map((project) => {
+        <section id="projeler" className="sp-section sp-container">
+          <p className="sp-eyebrow mb-4 text-center">{lang === "tr" ? "Projeler" : "Projects"}</p>
+          <h2 className="sp-h2 text-center">{t.projects.title}</h2>
+          <div className="sp-grid md:grid-cols-2 lg:grid-cols-3">
+            {t.projects.items.map((project, index) => {
               const href = project.github ?? null;
-              const Wrapper = href ? "a" : "article";
+              const featured = index === 0;
               return (
-                <Wrapper
-                  key={project.title}
-                  {...(href ? { href, target: "_blank", rel: "noreferrer" } : {})}
-                  className={`spacious-card flex flex-col ${href ? "transition-shadow hover:shadow-sm" : ""}`}
-                >
-                  <h3 className="spacious-heading-md">{project.title}</h3>
-                  <p className="spacious-body mt-6 flex-1">{project.description}</p>
-                  <div className="mt-8 flex flex-wrap gap-2">
+                <article key={project.title} className="sp-card flex flex-col">
+                  {featured && (
+                    <span className="sp-badge mb-6">{lang === "tr" ? "Öne çıkan" : "Featured"}</span>
+                  )}
+                  <h3 className="sp-h4">{project.title}</h3>
+                  <p className="sp-body flex-1">{project.description}</p>
+                  <ul className="mt-8 flex flex-col gap-3">
                     {project.tech.map((tech) => (
-                      <span key={tech} className="spacious-tag">
+                      <li key={tech} className="flex items-center gap-3 text-sm text-[var(--text)]">
+                        <CheckIcon />
                         {tech}
-                      </span>
+                      </li>
                     ))}
-                  </div>
-                  {href && <span className="spacious-link mt-8 inline-block">{t.projects.viewOnGitHub} →</span>}
-                </Wrapper>
+                  </ul>
+                  {href ? (
+                    <a href={href} target="_blank" rel="noreferrer" className={`sp-btn mt-8 w-full ${featured ? "sp-btn-primary" : "sp-btn-ghost"}`}>
+                      {t.projects.viewOnGitHub} →
+                    </a>
+                  ) : (
+                    <span className={`sp-btn mt-8 w-full ${featured ? "sp-btn-primary" : "sp-btn-ghost"}`}>
+                      {featured ? (lang === "tr" ? "Üretimde" : "In production") : t.projects.live}
+                    </span>
+                  )}
+                </article>
               );
             })}
           </div>
         </section>
 
-        <section id="iletisim" className="spacious-section spacious-container">
-          <SectionIntro eyebrow={lang === "tr" ? "İletişim" : "Contact"} title={t.contact.title} />
-          <p className="spacious-body-lg mx-auto mb-16 max-w-xl text-center md:mb-20">{t.contact.subtitle}</p>
-          <div className="spacious-card mx-auto max-w-3xl">
-            <div className="grid gap-8 sm:grid-cols-2 sm:gap-10">
-              <a href="mailto:suleymangulter2@gmail.com" className="spacious-contact-row spacious-text-primary">
-                <MailIcon className="h-5 w-5 shrink-0" />
-                <span className="break-all text-sm">suleymangulter2@gmail.com</span>
-              </a>
-              <a href="https://github.com/suleymanngulter/" target="_blank" rel="noreferrer" className="spacious-contact-row">
-                <GitHubIcon className="spacious-icon-primary h-5 w-5 shrink-0" />
-                GitHub
-              </a>
-              <a href="https://www.linkedin.com/in/suleymanngulter/" target="_blank" rel="noreferrer" className="spacious-contact-row">
-                <LinkedInIcon className="spacious-icon-primary h-5 w-5 shrink-0" />
-                LinkedIn
+        <section id="iletisim" className="sp-section sp-container">
+          <div className="grid items-start gap-16 lg:grid-cols-2 lg:gap-24">
+            <div>
+              <p className="sp-eyebrow mb-4">{t.contact.eyebrow}</p>
+              <h2 className="sp-h2">{t.contact.title}</h2>
+              <p className="sp-lead mb-10">{t.contact.subtitle}</p>
+              <ul className="mb-10 flex flex-col gap-4">
+                {t.contact.points.map((point) => (
+                  <li key={point} className="flex items-start gap-3 text-[var(--text)]">
+                    <CheckIcon />
+                    <span>{point}</span>
+                  </li>
+                ))}
+              </ul>
+              <a href="mailto:suleymangulter2@gmail.com" className="sp-link">
+                {lang === "tr" ? "E-posta at" : "Email me"} ↗
               </a>
             </div>
-            <p className="spacious-eyebrow mt-12 text-center">{t.contact.location}</p>
+            <div className="sp-card">
+              <h3 className="sp-h4">{t.contact.formTitle}</h3>
+              <p className="sp-body mb-8">{t.contact.formHint}</p>
+              <div className="flex flex-col gap-6">
+                <div>
+                  <span className="sp-label">{lang === "tr" ? "E-posta" : "Work email"}</span>
+                  <a href="mailto:suleymangulter2@gmail.com" className="sp-field">
+                    suleymangulter2@gmail.com
+                  </a>
+                </div>
+                <a href="mailto:suleymangulter2@gmail.com" className="sp-btn sp-btn-primary w-full">
+                  {t.contact.send} →
+                </a>
+                <div className="flex flex-wrap gap-6">
+                  <a href="https://github.com/suleymanngulter/" target="_blank" rel="noreferrer" className="sp-link">
+                    GitHub ↗
+                  </a>
+                  <a href="https://www.linkedin.com/in/suleymanngulter/" target="_blank" rel="noreferrer" className="sp-link">
+                    LinkedIn ↗
+                  </a>
+                </div>
+                <p className="sp-caption">{t.contact.location}</p>
+              </div>
+            </div>
           </div>
         </section>
       </main>
 
-      <footer className="spacious-container spacious-caption py-12 text-center md:py-16">
+      <footer className="sp-container sp-caption py-12 text-center md:py-16">
         © {new Date().getFullYear()} Süleyman Gülter. {t.footer.rights}
       </footer>
     </div>
-  );
-}
-
-function PhoneIcon({ className }: { className?: string }) {
-  return (
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
-      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
-    </svg>
-  );
-}
-
-function MailIcon({ className }: { className?: string }) {
-  return (
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
-      <rect width="20" height="16" x="2" y="4" rx="2" />
-      <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
-    </svg>
-  );
-}
-
-function GitHubIcon({ className }: { className?: string }) {
-  return (
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
-      <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4" />
-      <path d="M9 18c-4.51 2-5-2-7-2" />
-    </svg>
-  );
-}
-
-function LinkedInIcon({ className }: { className?: string }) {
-  return (
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
-      <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
-      <rect width="4" height="12" x="2" y="9" />
-      <circle cx="4" cy="4" r="2" />
-    </svg>
   );
 }
