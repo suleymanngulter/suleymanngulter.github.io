@@ -1,8 +1,8 @@
 name: Deploy to GitHub Pages
 
+# Site Vercel'de yayında. Bu workflow bilinçli olarak kapalı;
+# eski Pages deploy'unu elle tetiklemek istersen workflow_dispatch kullan.
 on:
-  push:
-    branches: [main]
   workflow_dispatch:
 
 permissions:

@@ -9,6 +9,8 @@ import {
   type Locale,
 } from "../i18n/translations";
 
+const SITE_URL = "https://www.suleymangulter.com";
+
 export function meta({}: Route.MetaArgs) {
   return [
     { title: "Süleyman Gülter | Software Engineer" },
@@ -17,6 +19,10 @@ export function meta({}: Route.MetaArgs) {
       content:
         "Süleyman Gülter - Software Engineer. Projelerim, deneyimlerim ve iletişim bilgilerim.",
     },
+    { tagName: "link", rel: "canonical", href: `${SITE_URL}/` },
+    { property: "og:url", content: `${SITE_URL}/` },
+    { property: "og:type", content: "website" },
+    { name: "twitter:card", content: "summary" },
   ];
 }
 
