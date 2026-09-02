@@ -1,4 +1,8 @@
+import { educationDates, experienceDates } from "./cv-dates";
+
 export type Locale = "tr" | "en";
+export type { DateRange } from "./dates";
+export { formatDateRange } from "./dates";
 
 export const translations = {
   tr: {
@@ -27,21 +31,21 @@ export const translations = {
       items: [
         {
           school: "Düzce Üniversitesi",
-          years: "2022-2026",
+          dateRange: educationDates.duzce,
           program: "Bilgisayar Mühendisliği",
-          gpa: "3.19",
+          gpa: "3.23",
           extra: null as string | null,
         },
         {
           school: "Dumlupınar Üniversitesi",
-          years: "2021-2022",
+          dateRange: educationDates.dumlupinar,
           program: "Bilgisayar Mühendisliği İngilizce Hazırlık",
           gpa: "3.01",
           extra: "Pearson B1 İngilizce Sertifikası",
         },
         {
           school: "Karamürsel Anadolu Lisesi",
-          years: "2017-2021",
+          dateRange: educationDates.karamursel,
           program: "",
           gpa: "",
           extra: null as string | null,
@@ -54,7 +58,7 @@ export const translations = {
       items: [
         {
           title: "Software Engineer",
-          period: "2026",
+          dateRange: experienceDates.yukatech,
           org: "Yukatech Bilişim A.Ş.",
           description:
             "Software Engineer olarak çalıştım. Node.js ile Backend, Clean Architecture ve Mikroservis Mimarisi alanlarında çeşitli projeler geliştirdim.",
@@ -62,7 +66,7 @@ export const translations = {
         },
         {
           title: "Entrepreneurship Marathon",
-          period: "2025",
+          dateRange: experienceDates.satailite,
           org: "Düzce Teknopark",
           description:
             "SATaiLITE sel riski tespit sistemi fikriyle finalist ekipler arasında yer aldım. Girişimcilik, iş fikri geliştirme, iş modelleri ve hedef kitle belirleme konularında deneyim kazandım.",
@@ -70,7 +74,7 @@ export const translations = {
         },
         {
           title: "GDG On Campus Düzce Üniversitesi Hackathon Koordinatörü",
-          period: "2024-2025",
+          dateRange: experienceDates.gdg,
           org: "Düzce Üniversitesi",
           description:
             "Hackathon Koordinatörü olarak mülakat stratejilerini yeniden yapılandırdım; teknik yeterliliğin ötesinde uyum ve öğrenmeye açıklık kapasitesi yüksek bir ekip kurdum. Çözüm odaklı bakış açısı ve açık fikirlilik kültürü oluşturarak krizleri verimli yönetebilen dinamik bir ortam yarattım.",
@@ -78,7 +82,7 @@ export const translations = {
         },
         {
           title: "Backend Developer Stajyer",
-          period: "2024",
+          dateRange: experienceDates.tersan,
           org: "Tersan Tersanesi",
           description:
             "ERP Programlama alanında çalıştım. .NET Core Web API, Mikroservis Mimarisi ve DevOps süreçleri ile Backend geliştirme deneyimi kazandım.",
@@ -86,7 +90,7 @@ export const translations = {
         },
         {
           title: "Entrepreneurship Marathon",
-          period: "2024",
+          dateRange: experienceDates.tarlabot,
           org: "Düzce Teknopark",
           description:
             "TarlaBot insansız tarım aracı projesiyle finalist ekipler arasında yer aldım. Fikir geliştirme ve ekip çalışması konularında önemli deneyim kazandım.",
@@ -94,7 +98,7 @@ export const translations = {
         },
         {
           title: "Mobile Developer Stajyer",
-          period: "2024",
+          dateRange: experienceDates.tba,
           org: "TBA Academy",
           description:
             "Flutter ile mobil uygulama geliştirme alanında staj yaptım ve kütüphane otomasyonu uygulaması geliştirdim.",
@@ -256,21 +260,21 @@ export const translations = {
       items: [
         {
           school: "Düzce University",
-          years: "2022-2026",
+          dateRange: educationDates.duzce,
           program: "Computer Engineering",
-          gpa: "3.19",
+          gpa: "3.23",
           extra: null as string | null,
         },
         {
           school: "Dumlupınar University",
-          years: "2021-2022",
+          dateRange: educationDates.dumlupinar,
           program: "Computer Engineering English Preparatory School",
           gpa: "3.01",
           extra: "Pearson B1 English Certificate",
         },
         {
           school: "Karamürsel Anatolian High School",
-          years: "2017-2021",
+          dateRange: educationDates.karamursel,
           program: "",
           gpa: "",
           extra: null as string | null,
@@ -283,7 +287,7 @@ export const translations = {
       items: [
         {
           title: "Software Engineer",
-          period: "2026",
+          dateRange: experienceDates.yukatech,
           org: "Yukatech Bilişim A.Ş.",
           description:
             "Worked as a Software Engineer. Developed various projects in Backend, Clean Architecture, and Microservice Architecture with Node.js.",
@@ -291,7 +295,7 @@ export const translations = {
         },
         {
           title: "Entrepreneurship Marathon",
-          period: "2025",
+          dateRange: experienceDates.satailite,
           org: "Düzce Teknopark",
           description:
             "Became one of the finalist teams with the SATaiLITE flood risk detection system idea. Gained experience in entrepreneurship, business idea development, business models, and target audience identification.",
@@ -299,7 +303,7 @@ export const translations = {
         },
         {
           title: "GDG On Campus Düzce University Hackathon Coordinator",
-          period: "2024-2025",
+          dateRange: experienceDates.gdg,
           org: "Düzce University",
           description:
             "As Hackathon Coordinator, I restructured interview strategies by forming a team with high adaptability and openness to learning beyond technical competence. Built a solution-oriented perspective and open-minded culture, creating a dynamic atmosphere that efficiently manages crises.",
@@ -307,7 +311,7 @@ export const translations = {
         },
         {
           title: "Backend Developer Intern",
-          period: "2024",
+          dateRange: experienceDates.tersan,
           org: "Tersan Shipyard",
           description:
             "Worked in ERP Programming. Gained Backend development experience with .NET Core Web API, Microservices Architecture, and DevOps processes.",
@@ -315,7 +319,7 @@ export const translations = {
         },
         {
           title: "Entrepreneurship Marathon",
-          period: "2024",
+          dateRange: experienceDates.tarlabot,
           org: "Düzce Teknopark",
           description:
             "Ranked among the finalist teams with TarlaBot, an unmanned agricultural vehicle project. Gained significant experience in idea development and teamwork.",
@@ -323,7 +327,7 @@ export const translations = {
         },
         {
           title: "Mobile Developer Intern",
-          period: "2024",
+          dateRange: experienceDates.tba,
           org: "TBA Academy",
           description:
             "Completed an internship in mobile application development with Flutter and developed a library automation application.",

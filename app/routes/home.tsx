@@ -5,6 +5,7 @@ import {
   getLocaleFromBrowser,
   LOCALE_STORAGE_KEY,
   translations,
+  formatDateRange,
   type Locale,
 } from "../i18n/translations";
 
@@ -222,10 +223,10 @@ export default function Home() {
           <h1 className="sp-h1 max-w-5xl">Süleyman Gülter</h1>
           <p className="sp-lead mx-auto mb-10">{t.hero.tagline}</p>
           <div className="sp-cta-row">
-            <a href="#projeler" className="sp-btn sp-btn-primary w-full sm:w-auto">
+            <a href="#projeler" className="sp-btn sp-btn-primary">
               {t.hero.viewProjects} →
             </a>
-            <a href="#iletisim" className="sp-btn sp-btn-ghost w-full sm:w-auto">
+            <a href="#iletisim" className="sp-btn sp-btn-ghost">
               {t.hero.getInTouch}
             </a>
           </div>
@@ -234,7 +235,7 @@ export default function Home() {
         <section id="hakkimda" className="sp-section sp-container">
           <p className="sp-eyebrow mb-4 text-center">{lang === "tr" ? "Profil" : "Profile"}</p>
           <h2 className="sp-h2 mx-auto max-w-3xl text-center">{t.about.title}</h2>
-          <p className="sp-lead mx-auto mb-16 text-center md:mb-20">{t.about.text}</p>
+          <p className="sp-lead mx-auto mb-10 text-center md:mb-16 lg:mb-20">{t.about.text}</p>
           <div className="sp-grid md:grid-cols-3">
             <article>
               <span className="sp-icon-ring" aria-hidden>
@@ -246,8 +247,8 @@ export default function Home() {
               <h3 className="sp-h4">{t.contact.location}</h3>
               <p className="sp-body">
                 {lang === "tr"
-                  ? "Düzce Üniversitesi Bilgisayar Mühendisliği. GPA 3.19."
-                  : "Computer Engineering at Düzce University. GPA 3.19."}
+                  ? "Düzce Üniversitesi Bilgisayar Mühendisliği. GPA 3.23."
+                  : "Computer Engineering at Düzce University. GPA 3.23."}
               </p>
             </article>
             <article>
@@ -288,7 +289,7 @@ export default function Home() {
             {t.education.items.map((edu) => (
               <li key={edu.school} className="sp-card">
                 <h3 className="sp-h4 mb-4">{edu.school}</h3>
-                <p className="sp-caption mb-6">{edu.years}</p>
+                <p className="sp-caption mb-6">{formatDateRange(lang, edu.dateRange)}</p>
                 {edu.program && <p className="sp-body mb-4">{edu.program}</p>}
                 {edu.gpa && (
                   <p className="sp-body">
@@ -306,7 +307,7 @@ export default function Home() {
           <h2 className="sp-h2 text-center">{t.experience.title}</h2>
           <ul className="sp-grid md:grid-cols-2 lg:grid-cols-3">
             {t.experience.items.map((exp) => (
-              <li key={exp.title + exp.period} className="sp-card flex flex-col">
+              <li key={exp.title + formatDateRange(lang, exp.dateRange)} className="sp-card flex flex-col">
                 <p className="sp-quote" aria-hidden>
                   ”
                 </p>
@@ -314,7 +315,7 @@ export default function Home() {
                 <p className="sp-body flex-1">{exp.description}</p>
                 <p className="mt-8 text-sm text-[var(--text)]">
                   {exp.org}
-                  <span className="sp-caption"> · {exp.period}</span>
+                  <span className="sp-caption"> · {formatDateRange(lang, exp.dateRange)}</span>
                 </p>
                 {exp.link && (
                   <a href={exp.link} target="_blank" rel="noreferrer" className="sp-link mt-4">
@@ -384,7 +385,7 @@ export default function Home() {
         </section>
 
         <section id="iletisim" className="sp-section sp-container">
-          <div className="grid items-start gap-16 lg:grid-cols-2 lg:gap-24">
+          <div className="grid min-w-0 items-start gap-10 md:gap-16 lg:grid-cols-2 lg:gap-24">
             <div>
               <p className="sp-eyebrow mb-4">{t.contact.eyebrow}</p>
               <h2 className="sp-h2">{t.contact.title}</h2>
@@ -407,7 +408,7 @@ export default function Home() {
               <div className="flex flex-col gap-6">
                 <div>
                   <span className="sp-label">{lang === "tr" ? "E-posta" : "Work email"}</span>
-                  <a href="mailto:suleymangulter2@gmail.com" className="sp-field">
+                  <a href="mailto:suleymangulter2@gmail.com" className="sp-field break-all">
                     suleymangulter2@gmail.com
                   </a>
                 </div>
@@ -429,7 +430,7 @@ export default function Home() {
         </section>
       </main>
 
-      <footer className="sp-container sp-caption py-12 text-center md:py-16">
+      <footer className="sp-container sp-caption py-10 text-center md:py-16">
         © {new Date().getFullYear()} Süleyman Gülter. {t.footer.rights}
       </footer>
     </div>
