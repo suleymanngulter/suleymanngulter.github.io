@@ -92,7 +92,7 @@ Tüm metinler ve linkler **`app/i18n/translations.ts`** dosyasında toplanmışt
 - **Deneyim**: İş/deneyim başlıkları, kurum, açıklama, proje linki (varsa)
 - **Beceriler**: Liste maddeleri
 - **Projeler**: Proje adı, açıklama, teknoloji etiketleri, **GitHub (veya canlı) linki**
-- **İletişim**: E-posta, telefon, GitHub, LinkedIn, konum metni
+- **İletişim**: E-posta, GitHub, LinkedIn, konum metni
 
 Proje kartlarının tıklanınca gideceği adres, her proje nesnesindeki **`github`** alanıdır; isterseniz canlı site linki de ekleyebilirsiniz (gerekirse `home.tsx` içinde kullanımı genişletmeniz gerekir).
 
