@@ -8,21 +8,34 @@ import {
   formatDateRange,
   type Locale,
 } from "../i18n/translations";
-
-const SITE_URL = "https://www.suleymangulter.com";
+import {
+  OG_IMAGE,
+  SITE_DESCRIPTION,
+  SITE_NAME,
+  SITE_TITLE,
+  SITE_URL,
+} from "../site";
 
 export function meta({}: Route.MetaArgs) {
   return [
-    { title: "Süleyman Gülter | Software Engineer" },
-    {
-      name: "description",
-      content:
-        "Süleyman Gülter - Software Engineer. Projelerim, deneyimlerim ve iletişim bilgilerim.",
-    },
+    { title: SITE_TITLE },
+    { name: "description", content: SITE_DESCRIPTION },
+    { name: "robots", content: "index, follow" },
+    { name: "googlebot", content: "index, follow" },
+    { name: "author", content: SITE_NAME },
     { tagName: "link", rel: "canonical", href: `${SITE_URL}/` },
+    { property: "og:site_name", content: SITE_NAME },
+    { property: "og:title", content: SITE_TITLE },
+    { property: "og:description", content: SITE_DESCRIPTION },
     { property: "og:url", content: `${SITE_URL}/` },
     { property: "og:type", content: "website" },
-    { name: "twitter:card", content: "summary" },
+    { property: "og:locale", content: "tr_TR" },
+    { property: "og:locale:alternate", content: "en_US" },
+    { property: "og:image", content: OG_IMAGE },
+    { name: "twitter:card", content: "summary_large_image" },
+    { name: "twitter:title", content: SITE_TITLE },
+    { name: "twitter:description", content: SITE_DESCRIPTION },
+    { name: "twitter:image", content: OG_IMAGE },
   ];
 }
 
