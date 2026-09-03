@@ -1,6 +1,6 @@
 # Kişisel Portfolyo Şablonu
 
-Tek sayfa üzerinde çalışan, çok dilli ve koyu/açık mod destekli bir portfolyo sitesi. Kendi bilgilerinizi ekleyip GitHub Pages veya benzeri bir serviste yayınlayabilirsiniz.
+Tek sayfa üzerinde çalışan, çok dilli ve koyu/açık mod destekli bir portfolyo sitesi. Kendi bilgilerinizi ekleyip Vercel veya benzeri bir serviste yayınlayabilirsiniz.
 
 ---
 
@@ -13,7 +13,7 @@ Bu proje, kendinizi ve projelerinizi tanıtmak için kullanabileceğiniz bir por
 - **Tailwind CSS** – Stil ve responsive tasarım
 - **Vite** – Derleme ve geliştirme sunucusu
 
-Site tamamen istemci tarafında çalışır (SPA); GitHub Pages gibi statik hostinglerde sorunsuz çalışır.
+Site tamamen istemci tarafında çalışır (SPA); Vercel gibi statik hostinglerde sorunsuz çalışır.
 
 ---
 
@@ -35,7 +35,7 @@ Site tamamen istemci tarafında çalışır (SPA); GitHub Pages gibi statik host
 - **`app/i18n/translations.ts`** – Tüm metinler (TR/EN); içeriği buradan düzenlersiniz
 - **`app/root.tsx`** – HTML şablonu, fontlar, tema script’i
 - **`app/app.css`** – Genel stiller ve Tailwind tema ayarları
-- **`.github/workflows/deploy-pages.yml`** – GitHub Pages için otomatik deploy
+- **`vercel.json`** – Vercel build çıktısı ve SPA yönlendirmeleri
 
 İçerik değiştirmek için önce **`app/i18n/translations.ts`** dosyasına bakmanız yeterli.
 
@@ -110,18 +110,31 @@ Başarılı olursa çıktı **`build/client/`** klasöründe oluşur. Bu klasör
 
 ---
 
-### 6. GitHub Pages’e yayınlayın
+### 6. Vercel’e yayınlayın
 
-Bu projede **GitHub Actions** ile otomatik deploy için bir workflow dosyası vardır: **`.github/workflows/deploy-pages.yml`**. `main` branch’e her push’ta proje derlenir ve GitHub Pages’e gönderilir.
+Site **Vercel** üzerinde yayınlanır. `main` branch’e her push’ta Vercel otomatik build alır.
 
 **Yapmanız gerekenler:**
 
-1. Projeyi kendi GitHub hesabınıza ait bir repoya push edin (yeni repo açıp `git remote add origin ...` ile bağlayabilirsiniz).
-2. **GitHub’da** ilgili repoda **Settings** → **Pages** bölümüne gidin.
-3. **Build and deployment** kısmında **Source** olarak **GitHub Actions** seçin.
-4. `main` branch’e bir push yaptığınızda workflow çalışır; birkaç dakika içinde siteniz **`https://KULLANICI_ADI.github.io/REPO_ADI/`** adresinde yayında olur.
+1. [vercel.com](https://vercel.com) hesabıyla GitHub reposunu import edin.
+2. Framework Preset: **Other** (veya otomatik algılanır). Build Command: `npm run build`, Output Directory: `build/client`.
+3. Domain ekleyin: **Project → Settings → Domains** → `suleymangulter.com` ve `www.suleymangulter.com`.
+4. GoDaddy DNS’te Vercel’in verdiği kayıtları ayarlayın (aşağıya bakın).
 
-Eğer repo adınız **`KULLANICI_ADI.github.io`** ise (örneğin `johndoe.github.io`), site doğrudan **`https://KULLANICI_ADI.github.io`** adresinde açılır; sonundaki `/REPO_ADI` kısmı gerekmez.
+#### GoDaddy DNS (önerilen)
+
+GoDaddy → **My Products** → domain → **DNS** / **Manage DNS**:
+
+| Tip | Ad / Host | Değer | Not |
+|-----|-----------|-------|-----|
+| **A** | `@` | `216.198.79.1` (Vercel’in gösterdiği IP) | Apex (`suleymangulter.com`) |
+| **CNAME** | `www` | `cname.vercel-dns.com` (veya Vercel’in verdiği) | `www` alt alanı |
+
+- GoDaddy’deki **Domain Forwarding / Parked** yönlendirmesini kapatın; Vercel ile çakışır.
+- Eski GitHub Pages `A` / `CNAME` kayıtlarını silin.
+- DNS yayılımı 5 dk – 48 saat sürebilir; genelde 15–30 dk yeter.
+
+SSL sertifikası Vercel’de domain doğrulanınca otomatik gelir. Çalışan adres: **https://www.suleymangulter.com** (apex genelde `www`’ye yönlendirilir).
 
 ---
 
