@@ -12,10 +12,11 @@ import { jsonLd } from "./site";
 import "./app.css";
 
 export const links: Route.LinksFunction = () => [
-  { rel: "icon", href: "/favicon.ico", sizes: "any" },
-  { rel: "icon", type: "image/png", href: "/favicon-32.png", sizes: "32x32" },
-  { rel: "icon", type: "image/png", href: "/favicon-48.png", sizes: "48x48" },
-  { rel: "apple-touch-icon", href: "/apple-touch-icon.png" },
+  { rel: "icon", type: "image/svg+xml", href: "/favicon.svg?v=2" },
+  { rel: "icon", href: "/favicon.ico?v=2", sizes: "any" },
+  { rel: "icon", type: "image/png", href: "/favicon-32.png?v=2", sizes: "32x32" },
+  { rel: "icon", type: "image/png", href: "/favicon-48.png?v=2", sizes: "48x48" },
+  { rel: "apple-touch-icon", href: "/apple-touch-icon.png?v=2" },
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
   {
     rel: "preconnect",
