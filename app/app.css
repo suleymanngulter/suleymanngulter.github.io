@@ -1,25 +1,24 @@
 @import "tailwindcss";
 
 /*
- * TypeUI Spacious — live preview tokens sampled from typeui.sh screenshots.
- * Warm near-black, forest-green accent, Space Mono, 120px section rhythm.
+ * TypeUI Spacious — light theme only.
+ * Warm off-white surface, forest-green accent, Space Mono, 120px section rhythm.
  */
 :root {
   --primary: #13612f;
-  --primary-hover: #185a32;
+  --primary-hover: #0f4f26;
   --primary-on: #f7f8f7;
-  --logo: #185a32;
-  --surface: #0a0907;
-  --surface-raised: #11100e;
-  --text: #f7f8f7;
-  --text-muted: #8b8885;
-  --text-nav: #777673;
-  --border: #191816;
-  --border-card: #141311;
+  --surface: #f4f2ee;
+  --surface-raised: #ffffff;
+  --text: #11100e;
+  --text-muted: #5c5a56;
+  --text-nav: #6b6965;
+  --border: #dcd9d3;
+  --border-card: #e4e2dc;
   --radius-sm: 4px;
   --radius-md: 12px;
-  --glow: rgb(19 97 47 / 22%);
-  --glint: rgb(247 248 247 / 8%);
+  --glow: rgb(19 97 47 / 10%);
+  --glint: rgb(255 255 255 / 80%);
   --nav-h: 72px;
   --content-max: 1280px;
 }
@@ -30,22 +29,6 @@
   }
 }
 
-html.light {
-  --primary: #13612f;
-  --primary-hover: #0f4f26;
-  --primary-on: #f7f8f7;
-  --logo: #13612f;
-  --surface: #f4f2ee;
-  --surface-raised: #ffffff;
-  --text: #11100e;
-  --text-muted: #5c5a56;
-  --text-nav: #6b6965;
-  --border: #dcd9d3;
-  --border-card: #e4e2dc;
-  --glow: rgb(19 97 47 / 10%);
-  --glint: rgb(255 255 255 / 80%);
-}
-
 @theme {
   --font-sans: "Space Mono", ui-monospace, monospace;
   --font-display: "Space Mono", ui-monospace, monospace;
@@ -53,14 +36,10 @@ html.light {
 }
 
 html {
-  color-scheme: dark;
+  color-scheme: light;
   background-color: var(--surface);
   scroll-padding-top: calc(var(--nav-h) + 16px);
   scroll-behavior: smooth;
-}
-
-html.light {
-  color-scheme: light;
 }
 
 html,
@@ -195,55 +174,46 @@ video {
   color: var(--text);
 }
 
-.sp-logo {
+.sp-brand {
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
+  justify-self: start;
+  width: max-content;
   min-width: 0;
-  color: var(--text);
+  --rx: 0deg;
+  --ry: 0deg;
+  transform: perspective(720px) rotateX(var(--rx)) rotateY(var(--ry));
+  transform-origin: center;
+  transition: transform 0.16s ease-out;
+  will-change: transform;
 }
 
-@media (min-width: 640px) {
-  .sp-logo {
-    gap: 0.75rem;
-  }
-}
-
-.sp-logo-mark-img {
+.sp-logo-img {
   display: block;
-  height: 36px;
+  height: 48px;
   width: auto;
-  flex-shrink: 0;
-}
-
-.sp-logo-wordmark {
-  display: block;
-  height: 16px;
-  width: auto;
-  max-width: min(8.5rem, 34vw);
+  max-width: min(9.5rem, 42vw);
   object-fit: contain;
-  object-position: left center;
 }
 
-@media (min-width: 640px) {
-  .sp-logo-mark-img {
-    height: 44px;
-  }
-
-  .sp-logo-wordmark {
-    height: 18px;
-    max-width: min(11.5rem, 38vw);
-  }
+.sp-brand:hover,
+.sp-brand:focus-visible {
+  transform: perspective(720px) rotateX(var(--rx)) rotateY(var(--ry)) scale(1.1);
 }
 
 @media (min-width: 768px) {
-  .sp-logo-mark-img {
-    height: 52px;
+  .sp-logo-img {
+    height: 64px;
+    max-width: 12rem;
   }
+}
 
-  .sp-logo-wordmark {
-    height: 26px;
-    max-width: 17.5rem;
+@media (prefers-reduced-motion: reduce) {
+  .sp-brand,
+  .sp-brand:hover,
+  .sp-brand:focus-visible {
+    transform: none;
+    transition: none;
   }
 }
 
@@ -379,10 +349,6 @@ video {
 }
 
 .sp-btn-text:hover {
-  color: var(--primary-on);
-}
-
-html.light .sp-btn-text:hover {
   color: var(--primary);
 }
 

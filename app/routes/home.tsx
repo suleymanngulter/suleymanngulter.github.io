@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState, type MouseEvent } from "react";
 import { useSearchParams } from "react-router";
 import type { Route } from "./+types/home";
 import {
@@ -48,7 +48,39 @@ const navIds = [
   { href: "#iletisim", key: "contact" as const },
 ];
 
-const THEME_STORAGE_KEY = "portfolio-theme";
+function BrandLogo() {
+  const ref = useRef<HTMLAnchorElement>(null);
+
+  function resetTilt() {
+    const el = ref.current;
+    if (!el) return;
+    el.style.setProperty("--rx", "0deg");
+    el.style.setProperty("--ry", "0deg");
+  }
+
+  function onMove(event: MouseEvent<HTMLAnchorElement>) {
+    const el = ref.current;
+    if (!el) return;
+    const rect = el.getBoundingClientRect();
+    const x = (event.clientX - rect.left) / rect.width - 0.5;
+    const y = (event.clientY - rect.top) / rect.height - 0.5;
+    el.style.setProperty("--rx", `${(-y * 32).toFixed(2)}deg`);
+    el.style.setProperty("--ry", `${(x * 38).toFixed(2)}deg`);
+  }
+
+  return (
+    <a
+      href="#"
+      ref={ref}
+      className="sp-brand"
+      aria-label="Süleyman Gülter"
+      onMouseMove={onMove}
+      onMouseLeave={resetTilt}
+    >
+      <img src="/logo-sg.webp" alt="" className="sp-logo-img" width={640} height={470} />
+    </a>
+  );
+}
 
 function LanguageSwitcher({
   lang,
@@ -71,38 +103,6 @@ function LanguageSwitcher({
     >
       {isEnglish ? "TR" : "EN"}
     </button>
-  );
-}
-
-function ThemeToggle({ isLight, toggle }: { isLight: boolean; toggle: () => void }) {
-  return (
-    <button
-      type="button"
-      onClick={toggle}
-      title={isLight ? "Koyu moda geç" : "Açık moda geç"}
-      aria-label={isLight ? "Koyu moda geç" : "Açık moda geç"}
-      aria-pressed={isLight}
-      className="sp-btn-icon"
-    >
-      {isLight ? <SunIcon className="h-4 w-4" /> : <MoonIcon className="h-4 w-4" />}
-    </button>
-  );
-}
-
-function SunIcon({ className }: { className?: string }) {
-  return (
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden>
-      <circle cx="12" cy="12" r="4" />
-      <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41" />
-    </svg>
-  );
-}
-
-function MoonIcon({ className }: { className?: string }) {
-  return (
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden>
-      <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
-    </svg>
   );
 }
 
@@ -141,28 +141,10 @@ function LinkedInIcon({ className }: { className?: string }) {
   );
 }
 
-function readStoredTheme(): boolean {
-  if (typeof window === "undefined") return false;
-  const stored = localStorage.getItem(THEME_STORAGE_KEY);
-  if (stored === "dark") localStorage.setItem(THEME_STORAGE_KEY, "demo");
-  return stored === "light";
-}
-
-function applyTheme(isLight: boolean) {
-  document.documentElement.classList.remove("dark");
-  document.documentElement.classList.toggle("light", isLight);
-  localStorage.setItem(THEME_STORAGE_KEY, isLight ? "light" : "demo");
-}
-
 export default function Home() {
   const [searchParams, setSearchParams] = useSearchParams();
   const [lang, setLang] = useState<Locale>("tr");
-  const [isLight, setIsLight] = useState(readStoredTheme);
   const [menuOpen, setMenuOpen] = useState(false);
-
-  useEffect(() => {
-    applyTheme(isLight);
-  }, [isLight]);
 
   useEffect(() => {
     const fromUrl = searchParams.get("lang");
@@ -197,16 +179,7 @@ export default function Home() {
     <div className="sp-shell">
       <header className="sp-header">
         <nav className="sp-container sp-nav" aria-label="Primary">
-          <a href="#" className="sp-logo" aria-label="Süleyman Gülter">
-            <img src="/logo-mark.png" alt="" className="sp-logo-mark-img" width={36} height={52} />
-            <img
-              src="/logo-wordmark.png"
-              alt="Süleyman Gülter"
-              className="sp-logo-wordmark"
-              width={188}
-              height={28}
-            />
-          </a>
+          <BrandLogo />
           <ul className="sp-nav-links">
             {navIds.map(({ href, key }) => (
               <li key={href}>
@@ -217,7 +190,6 @@ export default function Home() {
             ))}
           </ul>
           <div className="sp-nav-actions">
-            <ThemeToggle isLight={isLight} toggle={() => setIsLight((p) => !p)} />
             <LanguageSwitcher lang={lang} setLanguage={setLanguage} />
             <a href="#iletisim" className="sp-btn sp-btn-primary sp-desktop-cta">
               {t.hero.getInTouch}

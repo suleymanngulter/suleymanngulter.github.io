@@ -34,11 +34,6 @@ export function Layout({ children }: { children: React.ReactNode }) {
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `(function(){var k="portfolio-theme",t=localStorage.getItem(k);document.documentElement.classList.remove("dark");if(t==="dark")localStorage.setItem(k,"demo");if(t==="light")document.documentElement.classList.add("light");else document.documentElement.classList.remove("light");})();`,
-          }}
-        />
         <Meta />
         <Links />
         <script

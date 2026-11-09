@@ -1,6 +1,6 @@
 # Kişisel Portfolyo Şablonu
 
-Tek sayfa üzerinde çalışan, çok dilli ve koyu/açık mod destekli bir portfolyo sitesi. Kendi bilgilerinizi ekleyip Vercel veya benzeri bir serviste yayınlayabilirsiniz.
+Tek sayfa üzerinde çalışan, çok dilli ve açık temalı bir portfolyo sitesi. Kendi bilgilerinizi ekleyip Vercel veya benzeri bir serviste yayınlayabilirsiniz.
 
 ---
 
@@ -22,7 +22,7 @@ Site tamamen istemci tarafında çalışır (SPA); Vercel gibi statik hostingler
 | Özellik | Açıklama |
 |--------|----------|
 | Çok dil | Türkçe ve İngilizce; bayrak ile dil değiştirme, tercih adres çubuğunda ve tarayıcıda saklanır |
-| Koyu / açık mod | Tema seçimi; tercih kaydedilir |
+| Açık tema | Sabit açık renk paleti |
 | Responsive | Mobil ve masaüstü uyumlu |
 | Bölümler | Hero, Hakkımda, Eğitim, Deneyim, Beceriler, Projeler, İletişim |
 | Proje linkleri | Proje kartlarına tıklanınca GitHub (veya belirlediğiniz) adresine gider |
@@ -31,9 +31,9 @@ Site tamamen istemci tarafında çalışır (SPA); Vercel gibi statik hostingler
 
 ## Proje Yapısı (Kısa Özet)
 
-- **`app/routes/home.tsx`** – Ana sayfa bileşeni (hero, bölümler, dil/tema mantığı)
+- **`app/routes/home.tsx`** – Ana sayfa bileşeni (hero, bölümler, dil değiştirme)
 - **`app/i18n/translations.ts`** – Tüm metinler (TR/EN); içeriği buradan düzenlersiniz
-- **`app/root.tsx`** – HTML şablonu, fontlar, tema script’i
+- **`app/root.tsx`** – HTML şablonu ve fontlar
 - **`app/app.css`** – Genel stiller ve Tailwind tema ayarları
 - **`vercel.json`** – Vercel build çıktısı ve SPA yönlendirmeleri
 

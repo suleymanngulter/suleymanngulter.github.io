@@ -3,7 +3,7 @@ export const SITE_NAME = "Süleyman Gülter";
 export const SITE_TITLE = "Süleyman Gülter | Software Engineer";
 export const SITE_DESCRIPTION =
   "Süleyman Gülter - Software Engineer. Node.js, .NET ve mikroservis odaklı projeler, deneyim ve iletişim.";
-export const OG_IMAGE = `${SITE_URL}/logo-wordmark.png`;
+export const OG_IMAGE = `${SITE_URL}/apple-touch-icon.png`;
 export const EMAIL = "suleymangulter2@gmail.com";
 export const GITHUB_URL = "https://github.com/suleymanngulter/";
 export const LINKEDIN_URL = "https://www.linkedin.com/in/suleymanngulter/";
