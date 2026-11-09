@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, type MouseEvent } from "react";
+import { useEffect, useRef, useState, type CSSProperties, type MouseEvent } from "react";
 import { useSearchParams } from "react-router";
 import type { Route } from "./+types/home";
 import {
@@ -48,14 +48,43 @@ const navIds = [
   { href: "#iletisim", key: "contact" as const },
 ];
 
+const LETTER_DEPTH = 11;
+
+function ExtrudedLetter({
+  char,
+  variant,
+}: {
+  char: string;
+  variant: "s" | "g";
+}) {
+  return (
+    <span className={`sp-3d-letter sp-3d-letter-${variant}`} aria-hidden>
+      {Array.from({ length: LETTER_DEPTH }, (_, i) => (
+        <span
+          key={i}
+          className="sp-3d-layer"
+          style={{ "--z": `${-i}px` } as CSSProperties}
+        >
+          {char}
+        </span>
+      ))}
+      <span className="sp-3d-face">{char}</span>
+    </span>
+  );
+}
+
 function BrandLogo() {
   const ref = useRef<HTMLAnchorElement>(null);
 
-  function resetTilt() {
+  function resetLetters() {
     const el = ref.current;
     if (!el) return;
-    el.style.setProperty("--rx", "0deg");
-    el.style.setProperty("--ry", "0deg");
+    el.style.removeProperty("--s-rx");
+    el.style.removeProperty("--s-ry");
+    el.style.removeProperty("--s-tz");
+    el.style.removeProperty("--g-rx");
+    el.style.removeProperty("--g-ry");
+    el.style.removeProperty("--g-tz");
   }
 
   function onMove(event: MouseEvent<HTMLAnchorElement>) {
@@ -64,8 +93,12 @@ function BrandLogo() {
     const rect = el.getBoundingClientRect();
     const x = (event.clientX - rect.left) / rect.width - 0.5;
     const y = (event.clientY - rect.top) / rect.height - 0.5;
-    el.style.setProperty("--rx", `${(-y * 32).toFixed(2)}deg`);
-    el.style.setProperty("--ry", `${(x * 38).toFixed(2)}deg`);
+    el.style.setProperty("--s-rx", `${(-y * 28).toFixed(2)}deg`);
+    el.style.setProperty("--s-ry", `${(x * 36 - 18).toFixed(2)}deg`);
+    el.style.setProperty("--s-tz", `${(8 + x * 10).toFixed(1)}px`);
+    el.style.setProperty("--g-rx", `${(-y * 24).toFixed(2)}deg`);
+    el.style.setProperty("--g-ry", `${(x * 36 + 16).toFixed(2)}deg`);
+    el.style.setProperty("--g-tz", `${(4 - x * 10).toFixed(1)}px`);
   }
 
   return (
@@ -75,9 +108,12 @@ function BrandLogo() {
       className="sp-brand"
       aria-label="Süleyman Gülter"
       onMouseMove={onMove}
-      onMouseLeave={resetTilt}
+      onMouseLeave={resetLetters}
     >
-      <img src="/logo-sg.webp" alt="" className="sp-logo-img" width={640} height={470} />
+      <span className="sp-logo-stack">
+        <ExtrudedLetter char="S" variant="s" />
+        <ExtrudedLetter char="G" variant="g" />
+      </span>
     </a>
   );
 }

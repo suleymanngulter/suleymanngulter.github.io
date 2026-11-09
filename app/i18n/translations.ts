@@ -162,6 +162,13 @@ export const translations = {
           github: "https://github.com/suleymanngulter/Restoran-Uygulamasi",
         },
         {
+          title: "AsistanBro",
+          description:
+            "Gizlilik odaklı, yerel backend'li VS Code yapay zeka kod asistanı. Kod makinede kalır; Groq, Gemini ve OpenRouter ile kendi anahtarınızı kullanırsınız. Semantik cache, çoklu sağlayıcı ve maliyet takibi.",
+          tech: ["Python", "FastAPI", "VS Code", "Docker"],
+          github: "https://github.com/suleymanngulter/asistanbro",
+        },
+        {
           title: "Fitness Automation",
           description:
             ".NET Framework, MSSQL ve Entity Framework ile masaüstü fitness yönetim uygulaması.",
@@ -389,6 +396,13 @@ export const translations = {
             "A microservice restaurant system built with Clean Architecture. TypeScript (Node) services, a Go newsletter service, RabbitMQ, PostgreSQL, Docker Compose, JWT, and CQRS catalog.",
           tech: ["TypeScript", "Go", "Microservices", "PostgreSQL", "RabbitMQ", "Docker"],
           github: "https://github.com/suleymanngulter/Restoran-Uygulamasi",
+        },
+        {
+          title: "AsistanBro",
+          description:
+            "Privacy-first, local-backend AI coding assistant for VS Code. Your code stays on the machine; you bring your own Groq, Gemini, or OpenRouter key. Semantic cache, multi-provider failover, and usage tracking.",
+          tech: ["Python", "FastAPI", "VS Code", "Docker"],
+          github: "https://github.com/suleymanngulter/asistanbro",
         },
         {
           title: "Fitness Automation",
